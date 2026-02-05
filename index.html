@@ -34,7 +34,6 @@
             position: relative;
         }
 
-        /* 雲朵裝飾 */
         body::before {
             content: '';
             position: fixed;
@@ -44,9 +43,7 @@
             height: 60px;
             background: rgba(255,255,255,0.8);
             border-radius: 50px;
-            box-shadow:
-                60px -20px 0 -10px rgba(255,255,255,0.8),
-                -40px -10px 0 -15px rgba(255,255,255,0.8);
+            box-shadow: 60px -20px 0 -10px rgba(255,255,255,0.8), -40px -10px 0 -15px rgba(255,255,255,0.8);
             animation: float 8s ease-in-out infinite;
             z-index: 0;
         }
@@ -60,9 +57,7 @@
             height: 45px;
             background: rgba(255,255,255,0.6);
             border-radius: 40px;
-            box-shadow:
-                40px -15px 0 -8px rgba(255,255,255,0.6),
-                -30px -8px 0 -12px rgba(255,255,255,0.6);
+            box-shadow: 40px -15px 0 -8px rgba(255,255,255,0.6), -30px -8px 0 -12px rgba(255,255,255,0.6);
             animation: float 10s ease-in-out infinite reverse;
             z-index: 0;
         }
@@ -373,6 +368,37 @@
             line-height: 1.5;
         }
 
+        .transport-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #1565C0;
+            margin-top: 6px;
+            border: 1px solid #90CAF9;
+        }
+
+        .transport-info.drive {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            color: #E65100;
+            border-color: #FFCC80;
+        }
+
+        .transport-info.walk {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            color: #2E7D32;
+            border-color: #A5D6A7;
+        }
+
+        .transport-info.train {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            color: #7B1FA2;
+            border-color: #CE93D8;
+        }
+
         .tag {
             display: inline-block;
             padding: 3px 10px;
@@ -441,37 +467,13 @@
         }
 
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            .day-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .time {
-                min-width: 80px;
-                font-size: 0.85rem;
-            }
-
-            .event {
-                flex-wrap: wrap;
-            }
-
-            .flight-row {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .hotel-details {
-                grid-template-columns: 1fr;
-            }
-
-            body::before, body::after {
-                display: none;
-            }
+            header h1 { font-size: 1.8rem; }
+            .day-header { flex-direction: column; gap: 10px; }
+            .time { min-width: 80px; font-size: 0.85rem; }
+            .event { flex-wrap: wrap; }
+            .flight-row { flex-direction: column; text-align: center; gap: 10px; }
+            .hotel-details { grid-template-columns: 1fr; }
+            body::before, body::after { display: none; }
         }
     </style>
 </head>
@@ -489,15 +491,15 @@
             <div class="flight-row">
                 <span class="flight-icon">🛫</span>
                 <div class="flight-details">
-                    <div class="route">去程：桃園 → 熊本</div>
-                    <div class="time">2月16日（一）07:30 桃園機場起飛 → 10:35 抵達熊本機場</div>
+                    <div class="route">去程：桃園 TPE → 熊本 KMJ</div>
+                    <div class="time">2月16日（一）07:30 桃園機場起飛 → 10:35 抵達熊本機場（飛行約2.5小時）</div>
                 </div>
             </div>
             <div class="flight-row">
                 <span class="flight-icon">🛬</span>
                 <div class="flight-details">
-                    <div class="route">回程：福岡 → 桃園</div>
-                    <div class="time">2月22日（日）19:10 福岡機場起飛</div>
+                    <div class="route">回程：福岡 FUK → 桃園 TPE</div>
+                    <div class="time">2月22日（日）19:10 福岡機場起飛（飛行約2.5小時）</div>
                 </div>
             </div>
         </div>
@@ -527,25 +529,35 @@
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🛫 抵達熊本機場</h3>
-                        <p>入境、領取行李、前往市區</p>
+                        <p>入境、領取行李</p>
                         <span class="tag tag-transport">交通</span>
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">11:30</span>
+                    <span class="time">11:10 - 12:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚌 前往熊本市區</h3>
+                        <p>搭乘機場利木津巴士（リムジンバス）前往熊本交通中心</p>
+                        <div class="transport-info">🚌 機場客運 約50分鐘 ¥800</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">12:00 - 12:15</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🏨 飯店寄放行李</h3>
                         <p>前往 OMO5 熊本寄放行李，輕裝出發</p>
-                        <span class="tag tag-transport">寄放行李</span>
+                        <div class="transport-info walk">🚶 步行 約10分鐘</div>
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">12:00 - 13:30</span>
+                    <span class="time">12:30 - 13:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🍱 櫻之馬場城彩苑</h3>
                         <p>城下町風情商店街，享用午餐與選購伴手禮</p>
+                        <div class="transport-info train">🚃 路面電車 約15分鐘 ¥170</div>
                         <span class="tag tag-food">美食</span>
                         <span class="tag tag-shopping">購物</span>
                     </div>
@@ -556,6 +568,7 @@
                     <div class="content">
                         <h3>🏯 熊本城</h3>
                         <p>日本三大名城之一，欣賞震災後修復的天守閣</p>
+                        <div class="transport-info walk">🚶 步行 約5分鐘（從城彩苑）</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -565,6 +578,7 @@
                     <div class="content">
                         <h3>🌆 熊本市役所十四樓展望台</h3>
                         <p>免費展望台，俯瞰熊本市區與熊本城全景</p>
+                        <div class="transport-info walk">🚶 步行 約10分鐘</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -574,6 +588,7 @@
                     <div class="content">
                         <h3>🐻 熊本熊廣場</h3>
                         <p>觀看熊本熊部長表演（請事先查詢活動時間）</p>
+                        <div class="transport-info train">🚃 路面電車 約10分鐘 ¥170</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -583,6 +598,7 @@
                     <div class="content">
                         <h3>🛍️ 肥後YOKAMON市場</h3>
                         <p>必買：TRANDOR半熟蛋咖哩麵包、MIGNON泡芙</p>
+                        <div class="transport-info walk">🚶 步行 約3分鐘（熊本站內）</div>
                         <span class="tag tag-shopping">購物</span>
                     </div>
                 </div>
@@ -592,6 +608,7 @@
                     <div class="content">
                         <h3>🥩 晚餐：馬櫻</h3>
                         <p>品嚐熊本名物馬肉料理</p>
+                        <div class="transport-info walk">🚶 步行 約5分鐘</div>
                         <span class="tag tag-food">美食</span>
                         <span class="tag tag-reservation">需預約</span>
                     </div>
@@ -602,6 +619,7 @@
                 <ul>
                     <li>熊本熊廣場表演時間需事先上官網確認</li>
                     <li>馬櫻晚餐需提前預約</li>
+                    <li>Day1 交通方式：機場客運、路面電車、步行</li>
                 </ul>
             </div>
         </div>
@@ -627,12 +645,12 @@
             </div>
             <div class="timeline">
                 <div class="event">
-                    <span class="time">09:00 - 10:30</span>
+                    <span class="time">09:00 - 10:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🍳 早餐 & 準備出發</h3>
-                        <p>飯店早餐後整理行李，前往租車點</p>
-                        <span class="tag tag-food">早餐</span>
+                        <p>飯店周邊早餐，整理行李前往租車點</p>
+                        <div class="transport-info walk">🚶 步行前往租車點</div>
                     </div>
                 </div>
                 <div class="event">
@@ -641,6 +659,7 @@
                     <div class="content">
                         <h3>🚗 取車出發</h3>
                         <p>開始自駕之旅，前往阿蘇方向</p>
+                        <div class="transport-info drive">🚗 開車 開始自駕</div>
                         <span class="tag tag-transport">交通</span>
                     </div>
                 </div>
@@ -650,6 +669,7 @@
                     <div class="content">
                         <h3>🚏 大津道之驛</h3>
                         <p>休息站，補充零食飲料</p>
+                        <div class="transport-info drive">🚗 開車 約50分鐘（從熊本市區）</div>
                         <span class="tag tag-shopping">休息站</span>
                     </div>
                 </div>
@@ -659,6 +679,7 @@
                     <div class="content">
                         <h3>🚏 阿蘇道之驛</h3>
                         <p>阿蘇特產與當地農產品</p>
+                        <div class="transport-info drive">🚗 開車 約25分鐘</div>
                         <span class="tag tag-shopping">休息站</span>
                     </div>
                 </div>
@@ -668,6 +689,7 @@
                     <div class="content">
                         <h3>🌋 阿蘇山上廣場 → 火山口</h3>
                         <p>搭乘接駁車參觀活火山口（視火山活動狀況開放）</p>
+                        <div class="transport-info drive">🚗 開車 約20分鐘</div>
                         <span class="tag tag-nature">自然景觀</span>
                     </div>
                 </div>
@@ -677,6 +699,7 @@
                     <div class="content">
                         <h3>🌿 草千里 + 午餐</h3>
                         <p>草千里景觀餐廳享用午餐，欣賞大草原風光</p>
+                        <div class="transport-info drive">🚗 開車 約10分鐘</div>
                         <span class="tag tag-nature">自然景觀</span>
                         <span class="tag tag-food">美食</span>
                     </div>
@@ -687,6 +710,7 @@
                     <div class="content">
                         <h3>⛩️ 高千穗神社</h3>
                         <p>日本神話發源地，莊嚴神聖的能量景點</p>
+                        <div class="transport-info drive">🚗 開車 約1.5小時（從草千里）</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -696,6 +720,7 @@
                 <ul>
                     <li>阿蘇火山口可能因火山活動而關閉，建議出發前確認</li>
                     <li>飯店需另外告知有2位兒童同行</li>
+                    <li>Day2 取車後全程自駕</li>
                 </ul>
             </div>
         </div>
@@ -726,6 +751,7 @@
                     <div class="content">
                         <h3>🚣 高千穗峽划船</h3>
                         <p>穿梭於絕美峽谷，欣賞真名井瀑布</p>
+                        <div class="transport-info drive">🚗 開車 約10分鐘（從飯店）</div>
                         <span class="tag tag-nature">自然景觀</span>
                         <span class="tag tag-reservation">需預約</span>
                     </div>
@@ -736,6 +762,7 @@
                     <div class="content">
                         <h3>🥩 午餐：高千穂牛レストラン和</h3>
                         <p>品嚐當地高千穗牛燒肉</p>
+                        <div class="transport-info drive">🚗 開車 約5分鐘</div>
                         <span class="tag tag-food">美食</span>
                     </div>
                 </div>
@@ -745,6 +772,7 @@
                     <div class="content">
                         <h3>🚂 高千穗天照鐵道小火車</h3>
                         <p>搭乘觀光小火車，穿越高架鐵橋欣賞峽谷美景</p>
+                        <div class="transport-info drive">🚗 開車 約10分鐘</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -754,6 +782,7 @@
                     <div class="content">
                         <h3>🚏 高千穗道之驛</h3>
                         <p>選購當地特產與紀念品</p>
+                        <div class="transport-info drive">🚗 開車 約5分鐘</div>
                         <span class="tag tag-shopping">休息站</span>
                     </div>
                 </div>
@@ -763,6 +792,7 @@
                     <div class="content">
                         <h3>♨️ 抵達黑川溫泉</h3>
                         <p>入住溫泉旅館，享受露天風呂與會席料理晚餐</p>
+                        <div class="transport-info drive">🚗 開車 約1.5小時（從高千穗）</div>
                         <span class="tag tag-nature">溫泉</span>
                         <span class="tag tag-food">晚餐</span>
                     </div>
@@ -803,6 +833,7 @@
                     <div class="content">
                         <h3>🌉 九重夢大吊橋</h3>
                         <p>日本最高的步行者專用吊橋，壯麗山谷景色</p>
+                        <div class="transport-info drive">🚗 開車 約40分鐘（從黑川溫泉）</div>
                         <span class="tag tag-nature">自然景觀</span>
                     </div>
                 </div>
@@ -812,6 +843,7 @@
                     <div class="content">
                         <h3>🍜 別府午餐</h3>
                         <p>品嚐別府在地美食</p>
+                        <div class="transport-info drive">🚗 開車 約1小時（從九重）</div>
                         <span class="tag tag-food">美食</span>
                     </div>
                 </div>
@@ -821,6 +853,7 @@
                     <div class="content">
                         <h3>🚡 別府空中纜車</h3>
                         <p>搭乘纜車登上鶴見岳，俯瞰別府灣全景</p>
+                        <div class="transport-info drive">🚗 開車 約15分鐘</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -830,6 +863,7 @@
                     <div class="content">
                         <h3>🔥 別府地獄巡禮</h3>
                         <p>參觀海地獄、血池地獄等特色溫泉景觀</p>
+                        <div class="transport-info drive">🚗 開車 約10分鐘</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -839,6 +873,7 @@
                     <div class="content">
                         <h3>💊 Cosmos 藥妝店</h3>
                         <p>採購日本藥妝與生活用品</p>
+                        <div class="transport-info drive">🚗 開車 約15分鐘</div>
                         <span class="tag tag-shopping">購物</span>
                     </div>
                 </div>
@@ -871,6 +906,7 @@
                     <div class="content">
                         <h3>🦁 九州自然動物園</h3>
                         <p>搭乘叢林巴士近距離接觸野生動物</p>
+                        <div class="transport-info drive">🚗 開車 約40分鐘（從別府）</div>
                         <span class="tag tag-attraction">景點</span>
                     </div>
                 </div>
@@ -880,6 +916,7 @@
                     <div class="content">
                         <h3>🍽️ 午餐</h3>
                         <p>由布院特色餐廳用餐</p>
+                        <div class="transport-info drive">🚗 開車 約20分鐘（從動物園）</div>
                         <span class="tag tag-food">美食</span>
                     </div>
                 </div>
@@ -889,6 +926,7 @@
                     <div class="content">
                         <h3>🌅 金鱗湖 / 湯之坪街道</h3>
                         <p>漫步夢幻金鱗湖，逛逛湯之坪特色小店</p>
+                        <div class="transport-info walk">🚶 步行 湯之坪街道漫步</div>
                         <span class="tag tag-nature">自然景觀</span>
                         <span class="tag tag-shopping">購物</span>
                     </div>
@@ -899,6 +937,7 @@
                     <div class="content">
                         <h3>🍽️ 旅館晚餐</h3>
                         <p>享用旅館精緻晚餐</p>
+                        <div class="transport-info drive">🚗 開車 約5分鐘回旅館</div>
                         <span class="tag tag-food">晚餐</span>
                     </div>
                 </div>
@@ -931,6 +970,7 @@
                     <div class="content">
                         <h3>🚏 由布院休息站</h3>
                         <p>最後巡禮由布院，採購伴手禮</p>
+                        <div class="transport-info drive">🚗 開車 約5分鐘</div>
                         <span class="tag tag-shopping">休息站</span>
                     </div>
                 </div>
@@ -940,6 +980,7 @@
                     <div class="content">
                         <h3>⛩️ 太宰府天滿宮</h3>
                         <p>學問之神菅原道真公的總本社，必吃梅枝餅</p>
+                        <div class="transport-info drive">🚗 開車 約1.5小時（從由布院）</div>
                         <span class="tag tag-attraction">景點</span>
                         <span class="tag tag-food">美食</span>
                     </div>
@@ -950,6 +991,7 @@
                     <div class="content">
                         <h3>🚏 浮羽休息站</h3>
                         <p>水果王國，新鮮水果與甜點</p>
+                        <div class="transport-info drive">🚗 開車 約40分鐘</div>
                         <span class="tag tag-shopping">休息站</span>
                     </div>
                 </div>
@@ -958,7 +1000,8 @@
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚗 福岡還車</h3>
-                        <p>歸還租車，結束自駕行程</p>
+                        <p>歸還租車，結束5天自駕行程</p>
+                        <div class="transport-info drive">🚗 開車 約1小時（從浮羽）</div>
                         <span class="tag tag-transport">交通</span>
                     </div>
                 </div>
@@ -968,6 +1011,7 @@
                 <ul>
                     <li>東橫INN 房間1：onion523@gmail.com（積分折抵）</li>
                     <li>東橫INN 房間2：lean.lean@gmail.com（現場辦會員卡）</li>
+                    <li>還車後改為步行、地下鐵</li>
                 </ul>
             </div>
         </div>
@@ -988,6 +1032,7 @@
                     <div class="content">
                         <h3>🏙️ 福岡市區自由行</h3>
                         <p>推薦景點：博多運河城、天神地下街、中洲屋台</p>
+                        <div class="transport-info train">🚇 地下鐵 + 🚶 步行</div>
                         <span class="tag tag-attraction">景點</span>
                         <span class="tag tag-shopping">購物</span>
                         <span class="tag tag-food">美食</span>
@@ -997,8 +1042,9 @@
                     <span class="time">16:00</span>
                     <span class="dot"></span>
                     <div class="content">
-                        <h3>🚃 前往福岡機場</h3>
-                        <p>預留充足時間辦理登機手續</p>
+                        <h3>🚇 前往福岡機場</h3>
+                        <p>搭乘地下鐵前往機場，預留充足時間辦理登機手續</p>
+                        <div class="transport-info train">🚇 地下鐵 約5分鐘 ¥260</div>
                         <span class="tag tag-transport">交通</span>
                     </div>
                 </div>
@@ -1007,10 +1053,17 @@
                     <span class="dot"></span>
                     <div class="content">
                         <h3>✈️ 福岡起飛返回台北</h3>
-                        <p>結束美好的九州之旅</p>
+                        <p>結束美好的九州之旅，飛行約2.5小時</p>
                         <span class="tag tag-transport">航班</span>
                     </div>
                 </div>
+            </div>
+            <div class="notes">
+                <h4>注意事項</h4>
+                <ul>
+                    <li>福岡機場離市區很近，地下鐵約5分鐘</li>
+                    <li>建議起飛前2小時抵達機場</li>
+                </ul>
             </div>
         </div>
 
