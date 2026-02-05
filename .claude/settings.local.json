@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Kyushu 7-day travel itinerary webpage\n\nBeautiful responsive HTML page with detailed schedule for a 7-day trip to Kyushu, Japan \\(Feb 16-22, 2025\\).\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(winget:*)",
+      "Bash(git commit:*)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI\")",
+      "Bash(git push:*)",
+      "Bash(start:*)",
+      "Bash(gh repo rename:*)",
+      "Bash(git remote set-url:*)",
+      "WebSearch"
+    ]
+  }
+}
