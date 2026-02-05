@@ -14,7 +14,6 @@
             --totoro-gray: #708090;
             --sakura-pink: #FFB7C5;
             --forest-green: #228B22;
-            --cloud-white: #F5F5F5;
             --sunset-orange: #FFAA5C;
             --ocean-blue: #4A90A4;
         }
@@ -27,7 +26,6 @@
             background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
-            position: relative;
         }
 
         body::before {
@@ -41,20 +39,6 @@
             border-radius: 50px;
             box-shadow: 60px -20px 0 -10px rgba(255,255,255,0.8), -40px -10px 0 -15px rgba(255,255,255,0.8);
             animation: float 8s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 120px;
-            right: 15%;
-            width: 150px;
-            height: 45px;
-            background: rgba(255,255,255,0.6);
-            border-radius: 40px;
-            box-shadow: 40px -15px 0 -8px rgba(255,255,255,0.6), -30px -8px 0 -12px rgba(255,255,255,0.6);
-            animation: float 10s ease-in-out infinite reverse;
             z-index: 0;
         }
 
@@ -79,12 +63,11 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             border: 3px solid var(--warm-brown);
             position: relative;
-            overflow: hidden;
         }
 
         header::before { content: '🌸'; position: absolute; top: 10px; left: 20px; font-size: 2rem; animation: sway 3s ease-in-out infinite; }
         header::after { content: '🍃'; position: absolute; top: 10px; right: 20px; font-size: 2rem; animation: sway 3s ease-in-out infinite reverse; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--warm-brown); text-shadow: 2px 2px 0 rgba(255,255,255,0.8); }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--warm-brown); }
         header p { font-size: 1.1rem; color: var(--totoro-gray); }
         .departure-info { margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, var(--sakura-pink), #FFD1DC); border-radius: 20px; display: inline-block; color: var(--warm-brown); font-weight: 500; }
 
@@ -119,9 +102,7 @@
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             border: 3px solid var(--warm-brown);
-            transition: transform 0.3s ease;
         }
-        .day-card:hover { transform: translateY(-5px); }
 
         .day-header { padding: 20px 25px; color: white; display: flex; justify-content: space-between; align-items: center; }
         .day-1 .day-header { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
@@ -131,14 +112,14 @@
         .day-5 .day-header { background: linear-gradient(135deg, #CC5DE8, #E599F7); }
         .day-6 .day-header { background: linear-gradient(135deg, #20C997, #63E6BE); }
         .day-7 .day-header { background: linear-gradient(135deg, #868E96, #ADB5BD); }
-        .day-header h2 { font-size: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .day-header h2 { font-size: 1.5rem; }
         .day-header .date { font-size: 1rem; opacity: 0.9; }
-        .accommodation-badge { background: rgba(255,255,255,0.3); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        .accommodation-badge { background: rgba(255,255,255,0.3); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; }
 
         .hotel-info { background: linear-gradient(135deg, var(--cream), #FFF8DC); padding: 20px 25px; border-bottom: 2px dashed var(--warm-brown); }
-        .hotel-info h4 { color: var(--warm-brown); font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .hotel-info h4 { color: var(--warm-brown); font-size: 1.1rem; margin-bottom: 10px; }
         .hotel-info h4 a { color: var(--warm-brown); text-decoration: none; border-bottom: 2px dotted var(--warm-brown); }
-        .hotel-info h4 a:hover { color: var(--forest-green); border-color: var(--forest-green); }
+        .hotel-info h4 a:hover { color: var(--forest-green); }
         .hotel-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9rem; color: #555; }
         .hotel-details span { display: flex; align-items: center; gap: 6px; }
         .price-tag { background: linear-gradient(135deg, var(--forest-green), #32CD32); color: white; padding: 3px 12px; border-radius: 15px; font-weight: 600; font-size: 0.85rem; }
@@ -147,9 +128,31 @@
 
         .timeline { padding: 25px; }
 
-        .event { margin-bottom: 10px; }
+        .event { display: flex; margin-bottom: 15px; align-items: flex-start; }
+
+        .event-time {
+            min-width: 100px;
+            background: linear-gradient(135deg, var(--warm-brown), #A0826D);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            margin-right: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .day-1 .event-time { background: linear-gradient(135deg, #FF6B6B, #E85555); }
+        .day-2 .event-time { background: linear-gradient(135deg, #FFA94D, #E8923A); }
+        .day-3 .event-time { background: linear-gradient(135deg, #51CF66, #3DB854); }
+        .day-4 .event-time { background: linear-gradient(135deg, #339AF0, #2085D6); }
+        .day-5 .event-time { background: linear-gradient(135deg, #CC5DE8, #B347D1); }
+        .day-6 .event-time { background: linear-gradient(135deg, #20C997, #1AAF82); }
+        .day-7 .event-time { background: linear-gradient(135deg, #868E96, #6E757C); }
 
         .event-card {
+            flex: 1;
             background: #fafafa;
             border-radius: 15px;
             padding: 15px 20px;
@@ -164,12 +167,10 @@
         .day-6 .event-card { border-left-color: #20C997; }
         .day-7 .event-card { border-left-color: #868E96; }
 
-        .event-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .event-title { display: flex; align-items: center; gap: 10px; }
+        .event-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
         .event-title h3 { color: var(--warm-brown); font-size: 1.1rem; }
         .event-title h3 a { color: var(--warm-brown); text-decoration: none; }
         .event-title h3 a:hover { color: var(--forest-green); text-decoration: underline; }
-        .event-time { background: var(--warm-brown); color: white; padding: 3px 10px; border-radius: 10px; font-size: 0.85rem; font-weight: 500; }
         .event-desc { color: var(--totoro-gray); font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
 
         .map-link { display: inline-flex; align-items: center; gap: 4px; background: #4285F4; color: white; padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; text-decoration: none; margin-right: 5px; }
@@ -194,14 +195,14 @@
         .tag-nature { background: #D3F9D8; color: #2B8A3E; border-color: #8CE99A; }
         .tag-reservation { background: #FFE3E3; color: #C92A2A; border-color: #FFA8A8; }
         .tag-transport { background: #D0EBFF; color: #1864AB; border-color: #74C0FC; }
+        .tag-hotel { background: #FFE8CC; color: #D35400; border-color: #F0B27A; }
 
-        /* 交通資訊（地點間） */
         .transport-between {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 8px 0;
-            margin: 5px 0;
+            margin: 5px 0 5px 115px;
         }
         .transport-line {
             display: flex;
@@ -214,21 +215,9 @@
             color: #1565C0;
             border: 1px dashed #64B5F6;
         }
-        .transport-line.drive {
-            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-            color: #E65100;
-            border-color: #FFB74D;
-        }
-        .transport-line.walk {
-            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
-            color: #2E7D32;
-            border-color: #81C784;
-        }
-        .transport-line.train {
-            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
-            color: #7B1FA2;
-            border-color: #BA68C8;
-        }
+        .transport-line.drive { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); color: #E65100; border-color: #FFB74D; }
+        .transport-line.walk { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); color: #2E7D32; border-color: #81C784; }
+        .transport-line.train { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); color: #7B1FA2; border-color: #BA68C8; }
 
         .notes {
             background: linear-gradient(135deg, #FFF9DB, #FFF3BF);
@@ -250,16 +239,16 @@
             border: 3px solid var(--warm-brown);
             color: var(--warm-brown);
         }
-        footer p { margin-bottom: 5px; }
         .totoro-decoration { font-size: 3rem; margin: 10px 0; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
             .day-header { flex-direction: column; gap: 10px; }
-            .event-header { flex-direction: column; gap: 8px; }
-            .flight-row { flex-direction: column; text-align: center; gap: 10px; }
+            .event { flex-direction: column; }
+            .event-time { min-width: auto; width: 100%; margin-right: 0; margin-bottom: 10px; }
+            .transport-between { margin-left: 0; }
             .hotel-details { grid-template-columns: 1fr; }
-            body::before, body::after { display: none; }
+            body::before { display: none; }
         }
     </style>
 </head>
@@ -311,12 +300,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">10:35</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🛫 <a href="https://www.google.com/maps/place/熊本機場" target="_blank">抵達熊本機場</a></h3>
-                            </div>
-                            <span class="event-time">10:35</span>
+                        <div class="event-title">
+                            <h3>🛫 <a href="https://maps.google.com/?q=熊本機場" target="_blank">抵達熊本機場</a></h3>
                         </div>
                         <p class="event-desc">入境、領取行李</p>
                         <a href="https://maps.google.com/?q=熊本機場" target="_blank" class="map-link">📍 Google Map</a>
@@ -324,16 +311,14 @@
                 </div>
 
                 <div class="transport-between">
-                    <div class="transport-line">🚌 機場客運（リムジンバス）約50分鐘 ¥800 → 熊本交通中心</div>
+                    <div class="transport-line">🚌 機場客運 約50分鐘 ¥800 → 熊本交通中心</div>
                 </div>
 
                 <div class="event">
+                    <div class="event-time">12:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🏨 <a href="https://www.google.com/maps/place/OMO5熊本" target="_blank">OMO5 熊本寄放行李</a></h3>
-                            </div>
-                            <span class="event-time">12:00</span>
+                        <div class="event-title">
+                            <h3>🏨 <a href="https://maps.google.com/?q=OMO5熊本" target="_blank">OMO5 熊本寄放行李</a></h3>
                         </div>
                         <p class="event-desc">寄放行李，輕裝出發</p>
                         <a href="https://maps.google.com/?q=OMO5熊本" target="_blank" class="map-link">📍 Google Map</a>
@@ -345,12 +330,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">12:30 - 13:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🍱 <a href="https://www.google.com/maps/place/櫻之馬場城彩苑" target="_blank">櫻之馬場城彩苑</a></h3>
-                            </div>
-                            <span class="event-time">12:30 - 13:30</span>
+                        <div class="event-title">
+                            <h3>🍱 <a href="https://maps.google.com/?q=桜の馬場城彩苑" target="_blank">櫻之馬場城彩苑</a></h3>
                         </div>
                         <p class="event-desc">城下町風情商店街，享用午餐與選購伴手禮</p>
                         <a href="https://maps.google.com/?q=桜の馬場城彩苑" target="_blank" class="map-link">📍 Google Map</a>
@@ -364,12 +347,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">13:30 - 16:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🏯 <a href="https://www.google.com/maps/place/熊本城" target="_blank">熊本城</a></h3>
-                            </div>
-                            <span class="event-time">13:30 - 16:00</span>
+                        <div class="event-title">
+                            <h3>🏯 <a href="https://maps.google.com/?q=熊本城" target="_blank">熊本城</a></h3>
                         </div>
                         <p class="event-desc">日本三大名城之一，欣賞震災後修復的天守閣</p>
                         <a href="https://maps.google.com/?q=熊本城" target="_blank" class="map-link">📍 Google Map</a>
@@ -382,12 +363,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">16:00 - 16:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🌆 <a href="https://www.google.com/maps/place/熊本市役所" target="_blank">熊本市役所十四樓展望台</a></h3>
-                            </div>
-                            <span class="event-time">16:00 - 16:30</span>
+                        <div class="event-title">
+                            <h3>🌆 <a href="https://maps.google.com/?q=熊本市役所" target="_blank">熊本市役所十四樓展望台</a></h3>
                         </div>
                         <p class="event-desc">免費展望台，俯瞰熊本市區與熊本城全景</p>
                         <a href="https://maps.google.com/?q=熊本市役所" target="_blank" class="map-link">📍 Google Map</a>
@@ -400,33 +379,29 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">17:00 - 18:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🐻 <a href="https://www.google.com/maps/place/熊本熊廣場" target="_blank">熊本熊廣場</a></h3>
-                            </div>
-                            <span class="event-time">17:00 - 18:00</span>
+                        <div class="event-title">
+                            <h3>🐻 <a href="https://maps.google.com/?q=くまモンスクエア" target="_blank">熊本熊廣場</a></h3>
                         </div>
                         <p class="event-desc">觀看熊本熊部長表演</p>
                         <a href="https://maps.google.com/?q=くまモンスクエア" target="_blank" class="map-link">📍 Google Map</a>
                         <span class="tag tag-attraction">景點</span>
                         <div class="reservation-info">
-                            📅 表演時間查詢：<a href="https://kumamon-sq.jp/" target="_blank">kumamon-sq.jp</a>（需事先確認）
+                            📅 表演時間查詢：<a href="https://kumamon-sq.jp/" target="_blank">kumamon-sq.jp</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="transport-between">
-                    <div class="transport-line walk">🚶 步行 約3分鐘（熊本站內）</div>
+                    <div class="transport-line walk">🚶 步行 約3分鐘</div>
                 </div>
 
                 <div class="event">
+                    <div class="event-time">18:00 - 18:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🛍️ <a href="https://www.google.com/maps/place/肥後よかモン市場" target="_blank">肥後YOKAMON市場</a></h3>
-                            </div>
-                            <span class="event-time">18:00 - 18:30</span>
+                        <div class="event-title">
+                            <h3>🛍️ <a href="https://maps.google.com/?q=肥後よかモン市場" target="_blank">肥後YOKAMON市場</a></h3>
                         </div>
                         <p class="event-desc">必買：TRANDOR半熟蛋咖哩麵包、MIGNON泡芙</p>
                         <a href="https://maps.google.com/?q=肥後よかモン市場" target="_blank" class="map-link">📍 Google Map</a>
@@ -439,12 +414,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">19:00 - 20:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🥩 <a href="https://www.google.com/maps/place/馬櫻+熊本駅店" target="_blank">晚餐：馬櫻</a></h3>
-                            </div>
-                            <span class="event-time">19:00 - 20:30</span>
+                        <div class="event-title">
+                            <h3>🥩 <a href="https://maps.google.com/?q=馬桜+熊本駅店" target="_blank">晚餐：馬櫻</a></h3>
                         </div>
                         <p class="event-desc">品嚐熊本名物馬肉料理</p>
                         <a href="https://maps.google.com/?q=馬桜+熊本駅店" target="_blank" class="map-link">📍 Google Map</a>
@@ -454,6 +427,21 @@
                             📞 預約電話：<a href="tel:096-326-5070">096-326-5070</a><br>
                             🌐 預約網站：<a href="https://www.umasakura.com/" target="_blank">www.umasakura.com</a>
                         </div>
+                    </div>
+                </div>
+
+                <div class="transport-between">
+                    <div class="transport-line walk">🚶 步行 約10分鐘</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">21:00</div>
+                    <div class="event-card">
+                        <div class="event-title">
+                            <h3>🏨 入住 OMO5 熊本</h3>
+                        </div>
+                        <p class="event-desc">返回飯店休息</p>
+                        <span class="tag tag-hotel">住宿</span>
                     </div>
                 </div>
             </div>
@@ -480,12 +468,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 10:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🍳 早餐 & 準備出發</h3>
-                            </div>
-                            <span class="event-time">09:00 - 10:00</span>
+                        <div class="event-title">
+                            <h3>🍳 早餐 & 準備出發</h3>
                         </div>
                         <p class="event-desc">飯店周邊早餐，整理行李前往租車點</p>
                     </div>
@@ -496,12 +482,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">10:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚗 取車出發</h3>
-                            </div>
-                            <span class="event-time">10:30</span>
+                        <div class="event-title">
+                            <h3>🚗 取車出發</h3>
                         </div>
                         <p class="event-desc">開始自駕之旅，前往阿蘇方向</p>
                         <span class="tag tag-transport">交通</span>
@@ -513,12 +497,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">11:20 - 11:50</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚏 <a href="https://www.google.com/maps/place/道の駅大津" target="_blank">大津道之驛</a></h3>
-                            </div>
-                            <span class="event-time">11:20 - 11:50</span>
+                        <div class="event-title">
+                            <h3>🚏 <a href="https://maps.google.com/?q=道の駅大津" target="_blank">大津道之驛</a></h3>
                         </div>
                         <p class="event-desc">休息站，補充零食飲料（停留約30分鐘）</p>
                         <a href="https://maps.google.com/?q=道の駅大津" target="_blank" class="map-link">📍 Google Map</a>
@@ -531,12 +513,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">12:15 - 12:45</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚏 <a href="https://www.google.com/maps/place/道の駅阿蘇" target="_blank">阿蘇道之驛</a></h3>
-                            </div>
-                            <span class="event-time">12:15 - 12:45</span>
+                        <div class="event-title">
+                            <h3>🚏 <a href="https://maps.google.com/?q=道の駅阿蘇" target="_blank">阿蘇道之驛</a></h3>
                         </div>
                         <p class="event-desc">阿蘇特產與當地農產品（停留約30分鐘）</p>
                         <a href="https://maps.google.com/?q=道の駅阿蘇" target="_blank" class="map-link">📍 Google Map</a>
@@ -545,16 +525,35 @@
                 </div>
 
                 <div class="transport-between">
+                    <div class="transport-line drive">🚗 開車 約5分鐘 → ごとう屋</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">12:50 - 13:40</div>
+                    <div class="event-card">
+                        <div class="event-title">
+                            <h3>🥩 <a href="https://maps.google.com/?q=あか牛丼専門店+ごとう屋+阿蘇店" target="_blank">午餐：あか牛丼専門店 ごとう屋阿蘇店</a></h3>
+                        </div>
+                        <p class="event-desc">阿蘇名物赤牛丼，鮮嫩多汁的在地美食</p>
+                        <a href="https://maps.google.com/?q=あか牛丼専門店+ごとう屋+阿蘇店" target="_blank" class="map-link">📍 Google Map</a>
+                        <span class="tag tag-food">美食</span>
+                        <div class="reservation-info">
+                            🕐 營業時間：10:30～16:00（L.O. 15:30）<br>
+                            📅 定休日：第3週三<br>
+                            🌐 官網：<a href="https://asogotoya.jp/" target="_blank">asogotoya.jp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transport-between">
                     <div class="transport-line drive">🚗 開車 約20分鐘 → 阿蘇山上</div>
                 </div>
 
                 <div class="event">
+                    <div class="event-time">14:00 - 15:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🌋 <a href="https://www.google.com/maps/place/阿蘇山火口" target="_blank">阿蘇山上廣場 → 火山口</a></h3>
-                            </div>
-                            <span class="event-time">13:05 - 14:00</span>
+                        <div class="event-title">
+                            <h3>🌋 <a href="https://maps.google.com/?q=阿蘇山火口" target="_blank">阿蘇山上廣場 → 火山口</a></h3>
                         </div>
                         <p class="event-desc">搭乘接駁車參觀活火山口（視火山活動狀況開放）</p>
                         <a href="https://maps.google.com/?q=阿蘇山火口" target="_blank" class="map-link">📍 Google Map</a>
@@ -567,17 +566,14 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">15:10 - 16:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🌿 <a href="https://www.google.com/maps/place/草千里" target="_blank">草千里 + 午餐</a></h3>
-                            </div>
-                            <span class="event-time">14:10 - 15:30</span>
+                        <div class="event-title">
+                            <h3>🌿 <a href="https://maps.google.com/?q=草千里ヶ浜" target="_blank">草千里</a></h3>
                         </div>
-                        <p class="event-desc">草千里景觀餐廳享用午餐，欣賞大草原風光</p>
+                        <p class="event-desc">欣賞大草原風光，壯麗火山景色</p>
                         <a href="https://maps.google.com/?q=草千里ヶ浜" target="_blank" class="map-link">📍 Google Map</a>
                         <span class="tag tag-nature">自然景觀</span>
-                        <span class="tag tag-food">美食</span>
                     </div>
                 </div>
 
@@ -586,12 +582,26 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">17:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>⛩️ <a href="https://www.google.com/maps/place/高千穗神社" target="_blank">高千穗神社</a></h3>
-                            </div>
-                            <span class="event-time">17:00 - 18:00</span>
+                        <div class="event-title">
+                            <h3>🏨 入住 SOLEST 高千穗飯店</h3>
+                        </div>
+                        <p class="event-desc">辦理入住，放置行李休息</p>
+                        <a href="https://maps.google.com/?q=SOLEST高千穂ホテル" target="_blank" class="map-link">📍 Google Map</a>
+                        <span class="tag tag-hotel">住宿</span>
+                    </div>
+                </div>
+
+                <div class="transport-between">
+                    <div class="transport-line walk">🚶 步行 約10分鐘</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">18:00 - 19:00</div>
+                    <div class="event-card">
+                        <div class="event-title">
+                            <h3>⛩️ <a href="https://maps.google.com/?q=高千穂神社" target="_blank">高千穗神社</a></h3>
                         </div>
                         <p class="event-desc">日本神話發源地，莊嚴神聖的能量景點</p>
                         <a href="https://maps.google.com/?q=高千穂神社" target="_blank" class="map-link">📍 Google Map</a>
@@ -604,6 +614,7 @@
                 <ul>
                     <li>阿蘇火山口可能因火山活動而關閉，建議出發前確認</li>
                     <li>飯店需另外告知有2位兒童同行</li>
+                    <li>入住後改為步行前往神社</li>
                 </ul>
             </div>
         </div>
@@ -629,12 +640,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 10:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚣 <a href="https://www.google.com/maps/place/高千穗峽" target="_blank">高千穗峽划船</a></h3>
-                            </div>
-                            <span class="event-time">09:00 - 10:30</span>
+                        <div class="event-title">
+                            <h3>🚣 <a href="https://maps.google.com/?q=高千穂峡" target="_blank">高千穗峽划船</a></h3>
                         </div>
                         <p class="event-desc">穿梭於絕美峽谷，欣賞真名井瀑布</p>
                         <a href="https://maps.google.com/?q=高千穂峡" target="_blank" class="map-link">📍 Google Map</a>
@@ -653,12 +662,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">12:00 - 13:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🥩 <a href="https://www.google.com/maps/place/高千穂牛レストラン和" target="_blank">午餐：高千穂牛レストラン和</a></h3>
-                            </div>
-                            <span class="event-time">12:00 - 13:30</span>
+                        <div class="event-title">
+                            <h3>🥩 <a href="https://maps.google.com/?q=高千穂牛レストラン和" target="_blank">午餐：高千穂牛レストラン和</a></h3>
                         </div>
                         <p class="event-desc">品嚐當地高千穗牛燒肉</p>
                         <a href="https://maps.google.com/?q=高千穂牛レストラン和" target="_blank" class="map-link">📍 Google Map</a>
@@ -671,12 +678,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">14:00 - 15:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚂 <a href="https://www.google.com/maps/place/高千穗天照鐵道" target="_blank">高千穗天照鐵道小火車</a></h3>
-                            </div>
-                            <span class="event-time">14:00 - 15:30</span>
+                        <div class="event-title">
+                            <h3>🚂 <a href="https://maps.google.com/?q=高千穂あまてらす鉄道" target="_blank">高千穗天照鐵道小火車</a></h3>
                         </div>
                         <p class="event-desc">搭乘觀光小火車，穿越高架鐵橋欣賞峽谷美景</p>
                         <a href="https://maps.google.com/?q=高千穂あまてらす鉄道" target="_blank" class="map-link">📍 Google Map</a>
@@ -692,12 +697,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">15:35 - 16:05</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚏 <a href="https://www.google.com/maps/place/道の駅高千穂" target="_blank">高千穗道之驛</a></h3>
-                            </div>
-                            <span class="event-time">15:35 - 16:05</span>
+                        <div class="event-title">
+                            <h3>🚏 <a href="https://maps.google.com/?q=道の駅高千穂" target="_blank">高千穗道之驛</a></h3>
                         </div>
                         <p class="event-desc">選購當地特產與紀念品（停留約30分鐘）</p>
                         <a href="https://maps.google.com/?q=道の駅高千穂" target="_blank" class="map-link">📍 Google Map</a>
@@ -710,15 +713,14 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">17:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>♨️ <a href="https://www.google.com/maps/place/黑川溫泉" target="_blank">抵達黑川溫泉</a></h3>
-                            </div>
-                            <span class="event-time">17:30</span>
+                        <div class="event-title">
+                            <h3>🏨 入住若葉日式旅館</h3>
                         </div>
                         <p class="event-desc">入住溫泉旅館，享受露天風呂與會席料理晚餐</p>
-                        <a href="https://maps.google.com/?q=黒川温泉" target="_blank" class="map-link">📍 Google Map</a>
+                        <a href="https://maps.google.com/?q=黒川温泉+旅館わかば" target="_blank" class="map-link">📍 Google Map</a>
+                        <span class="tag tag-hotel">住宿</span>
                         <span class="tag tag-nature">溫泉</span>
                         <span class="tag tag-food">晚餐</span>
                     </div>
@@ -753,12 +755,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 10:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🌉 <a href="https://www.google.com/maps/place/九重夢大吊橋" target="_blank">九重夢大吊橋</a></h3>
-                            </div>
-                            <span class="event-time">09:00 - 10:00</span>
+                        <div class="event-title">
+                            <h3>🌉 <a href="https://maps.google.com/?q=九重夢大吊橋" target="_blank">九重夢大吊橋</a></h3>
                         </div>
                         <p class="event-desc">日本最高的步行者專用吊橋，壯麗山谷景色</p>
                         <a href="https://maps.google.com/?q=九重夢大吊橋" target="_blank" class="map-link">📍 Google Map</a>
@@ -767,16 +767,14 @@
                 </div>
 
                 <div class="transport-between">
-                    <div class="transport-line drive">🚗 開車 約40分鐘（從黑川溫泉）+ 約1小時 → 別府</div>
+                    <div class="transport-line drive">🚗 開車 約40分鐘（從黑川）+ 約1小時 → 別府</div>
                 </div>
 
                 <div class="event">
+                    <div class="event-time">12:00 - 13:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🍜 別府午餐</h3>
-                            </div>
-                            <span class="event-time">12:00 - 13:30</span>
+                        <div class="event-title">
+                            <h3>🍜 別府午餐</h3>
                         </div>
                         <p class="event-desc">品嚐別府在地美食</p>
                         <span class="tag tag-food">美食</span>
@@ -788,12 +786,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">14:00 - 15:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚡 <a href="https://www.google.com/maps/place/別府空中纜車" target="_blank">別府空中纜車</a></h3>
-                            </div>
-                            <span class="event-time">14:00 - 15:30</span>
+                        <div class="event-title">
+                            <h3>🚡 <a href="https://maps.google.com/?q=別府ロープウェイ" target="_blank">別府空中纜車</a></h3>
                         </div>
                         <p class="event-desc">搭乘纜車登上鶴見岳，俯瞰別府灣全景</p>
                         <a href="https://maps.google.com/?q=別府ロープウェイ" target="_blank" class="map-link">📍 Google Map</a>
@@ -806,12 +802,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">16:00 - 18:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🔥 <a href="https://www.google.com/maps/place/海地獄" target="_blank">別府地獄巡禮</a></h3>
-                            </div>
-                            <span class="event-time">16:00 - 18:00</span>
+                        <div class="event-title">
+                            <h3>🔥 <a href="https://maps.google.com/?q=海地獄" target="_blank">別府地獄巡禮</a></h3>
                         </div>
                         <p class="event-desc">參觀海地獄、血池地獄等特色溫泉景觀</p>
                         <a href="https://maps.google.com/?q=海地獄" target="_blank" class="map-link">📍 Google Map</a>
@@ -824,12 +818,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">18:30 - 19:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>💊 <a href="https://www.google.com/maps/place/コスモス薬品" target="_blank">Cosmos 藥妝店</a></h3>
-                            </div>
-                            <span class="event-time">18:30 - 19:30</span>
+                        <div class="event-title">
+                            <h3>💊 <a href="https://maps.google.com/?q=コスモス+別府" target="_blank">Cosmos 藥妝店</a></h3>
                         </div>
                         <p class="event-desc">採購日本藥妝與生活用品</p>
                         <a href="https://maps.google.com/?q=コスモス+別府" target="_blank" class="map-link">📍 Google Map</a>
@@ -860,12 +852,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 12:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🦁 <a href="https://www.google.com/maps/place/九州自然動物公園" target="_blank">九州自然動物園</a></h3>
-                            </div>
-                            <span class="event-time">09:00 - 12:00</span>
+                        <div class="event-title">
+                            <h3>🦁 <a href="https://maps.google.com/?q=アフリカンサファリ" target="_blank">九州自然動物園</a></h3>
                         </div>
                         <p class="event-desc">搭乘叢林巴士近距離接觸野生動物</p>
                         <a href="https://maps.google.com/?q=アフリカンサファリ" target="_blank" class="map-link">📍 Google Map</a>
@@ -878,15 +868,29 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">13:00 - 14:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🍽️ 午餐</h3>
-                            </div>
-                            <span class="event-time">13:00 - 14:00</span>
+                        <div class="event-title">
+                            <h3>🍽️ 午餐</h3>
                         </div>
                         <p class="event-desc">由布院特色餐廳用餐</p>
                         <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+
+                <div class="transport-between">
+                    <div class="transport-line drive">🚗 開車 約5分鐘 → 旅館</div>
+                </div>
+
+                <div class="event">
+                    <div class="event-time">14:30</div>
+                    <div class="event-card">
+                        <div class="event-title">
+                            <h3>🏨 入住溫柔之鄉</h3>
+                        </div>
+                        <p class="event-desc">辦理入住，放置行李</p>
+                        <a href="https://maps.google.com/?q=やわらぎの郷やどや" target="_blank" class="map-link">📍 Google Map</a>
+                        <span class="tag tag-hotel">住宿</span>
                     </div>
                 </div>
 
@@ -895,12 +899,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">15:00 - 17:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🌅 <a href="https://www.google.com/maps/place/金鱗湖" target="_blank">金鱗湖 / 湯之坪街道</a></h3>
-                            </div>
-                            <span class="event-time">14:30 - 17:00</span>
+                        <div class="event-title">
+                            <h3>🌅 <a href="https://maps.google.com/?q=金鱗湖" target="_blank">金鱗湖 / 湯之坪街道</a></h3>
                         </div>
                         <p class="event-desc">漫步夢幻金鱗湖，逛逛湯之坪特色小店</p>
                         <a href="https://maps.google.com/?q=金鱗湖" target="_blank" class="map-link">📍 Google Map</a>
@@ -910,16 +912,14 @@
                 </div>
 
                 <div class="transport-between">
-                    <div class="transport-line drive">🚗 開車 約5分鐘回旅館</div>
+                    <div class="transport-line walk">🚶 步行回旅館 約15分鐘</div>
                 </div>
 
                 <div class="event">
+                    <div class="event-time">18:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🍽️ 旅館晚餐</h3>
-                            </div>
-                            <span class="event-time">18:00</span>
+                        <div class="event-title">
+                            <h3>🍽️ 旅館晚餐</h3>
                         </div>
                         <p class="event-desc">享用旅館精緻晚餐</p>
                         <span class="tag tag-food">晚餐</span>
@@ -949,12 +949,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 09:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚏 <a href="https://www.google.com/maps/place/道の駅ゆふいん" target="_blank">由布院道之驛</a></h3>
-                            </div>
-                            <span class="event-time">09:00 - 09:30</span>
+                        <div class="event-title">
+                            <h3>🚏 <a href="https://maps.google.com/?q=道の駅ゆふいん" target="_blank">由布院道之驛</a></h3>
                         </div>
                         <p class="event-desc">最後巡禮由布院，採購伴手禮（停留約30分鐘）</p>
                         <a href="https://maps.google.com/?q=道の駅ゆふいん" target="_blank" class="map-link">📍 Google Map</a>
@@ -967,12 +965,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">11:00 - 13:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>⛩️ <a href="https://www.google.com/maps/place/太宰府天滿宮" target="_blank">太宰府天滿宮</a></h3>
-                            </div>
-                            <span class="event-time">11:00 - 13:00</span>
+                        <div class="event-title">
+                            <h3>⛩️ <a href="https://maps.google.com/?q=太宰府天満宮" target="_blank">太宰府天滿宮</a></h3>
                         </div>
                         <p class="event-desc">學問之神菅原道真公的總本社，必吃梅枝餅</p>
                         <a href="https://maps.google.com/?q=太宰府天満宮" target="_blank" class="map-link">📍 Google Map</a>
@@ -986,12 +982,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">13:40 - 14:10</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚏 <a href="https://www.google.com/maps/place/道の駅うきは" target="_blank">浮羽道之驛</a></h3>
-                            </div>
-                            <span class="event-time">13:40 - 14:10</span>
+                        <div class="event-title">
+                            <h3>🚏 <a href="https://maps.google.com/?q=道の駅うきは" target="_blank">浮羽道之驛</a></h3>
                         </div>
                         <p class="event-desc">水果王國，新鮮水果與甜點（停留約30分鐘）</p>
                         <a href="https://maps.google.com/?q=道の駅うきは" target="_blank" class="map-link">📍 Google Map</a>
@@ -1004,12 +998,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">18:30</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚗 福岡還車</h3>
-                            </div>
-                            <span class="event-time">18:30</span>
+                        <div class="event-title">
+                            <h3>🚗 福岡還車</h3>
                         </div>
                         <p class="event-desc">歸還租車，結束5天自駕行程</p>
                         <span class="tag tag-transport">交通</span>
@@ -1036,12 +1028,10 @@
             </div>
             <div class="timeline">
                 <div class="event">
+                    <div class="event-time">09:00 - 15:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🏙️ <a href="https://www.google.com/maps/place/博多運河城" target="_blank">福岡市區自由行</a></h3>
-                            </div>
-                            <span class="event-time">09:00 - 15:00</span>
+                        <div class="event-title">
+                            <h3>🏙️ <a href="https://maps.google.com/?q=キャナルシティ博多" target="_blank">福岡市區自由行</a></h3>
                         </div>
                         <p class="event-desc">推薦景點：博多運河城、天神地下街、中洲屋台</p>
                         <a href="https://maps.google.com/?q=キャナルシティ博多" target="_blank" class="map-link">📍 運河城</a>
@@ -1057,12 +1047,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">16:00</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>🚇 <a href="https://www.google.com/maps/place/福岡機場" target="_blank">前往福岡機場</a></h3>
-                            </div>
-                            <span class="event-time">16:00</span>
+                        <div class="event-title">
+                            <h3>🚇 <a href="https://maps.google.com/?q=福岡空港" target="_blank">前往福岡機場</a></h3>
                         </div>
                         <p class="event-desc">搭乘地下鐵前往機場，預留充足時間辦理登機手續</p>
                         <a href="https://maps.google.com/?q=福岡空港" target="_blank" class="map-link">📍 Google Map</a>
@@ -1071,12 +1059,10 @@
                 </div>
 
                 <div class="event">
+                    <div class="event-time">19:10</div>
                     <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">
-                                <h3>✈️ 福岡起飛返回台北</h3>
-                            </div>
-                            <span class="event-time">19:10</span>
+                        <div class="event-title">
+                            <h3>✈️ 福岡起飛返回台北</h3>
                         </div>
                         <p class="event-desc">結束美好的九州之旅，飛行約2.5小時</p>
                         <span class="tag tag-transport">航班</span>
