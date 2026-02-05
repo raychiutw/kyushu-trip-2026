@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 九州七日遊行程表</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --accent: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--white);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .day-card {
+            background: var(--white);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .day-header {
+            padding: 20px 25px;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-1 .day-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .day-2 .day-header { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .day-3 .day-header { background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .day-4 .day-header { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .day-5 .day-header { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .day-6 .day-header { background: linear-gradient(135deg, #1abc9c, #16a085); }
+        .day-7 .day-header { background: linear-gradient(135deg, #34495e, #2c3e50); }
+
+        .day-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .day-header .date {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .accommodation {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .timeline {
+            padding: 25px;
+        }
+
+        .event {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .event:last-child {
+            margin-bottom: 0;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: 55px;
+            top: 35px;
+            bottom: -20px;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .event:last-child::before {
+            display: none;
+        }
+
+        .time {
+            min-width: 110px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-right: 20px;
+            margin-top: 5px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .day-1 .dot { background: #e74c3c; }
+        .day-2 .dot { background: #e67e22; }
+        .day-3 .dot { background: #27ae60; }
+        .day-4 .dot { background: #3498db; }
+        .day-5 .dot { background: #9b59b6; }
+        .day-6 .dot { background: #1abc9c; }
+        .day-7 .dot { background: #34495e; }
+
+        .content {
+            flex: 1;
+        }
+
+        .content h3 {
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .content p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            margin-right: 5px;
+        }
+
+        .tag-food { background: #ffeaa7; color: #d63031; }
+        .tag-attraction { background: #dfe6e9; color: #2d3436; }
+        .tag-shopping { background: #a29bfe; color: #fff; }
+        .tag-nature { background: #55efc4; color: #00b894; }
+        .tag-reservation { background: #fd79a8; color: #fff; }
+        .tag-transport { background: #74b9ff; color: #0984e3; }
+
+        .notes {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 25px 25px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .notes h4 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .notes ul {
+            list-style: none;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        .notes ul li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes ul li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .day-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .time {
+                min-width: 80px;
+                font-size: 0.85rem;
+            }
+
+            .event {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌸 2025 九州七日遊 🗾</h1>
+            <p>熊本 → 阿蘇 → 高千穗 → 黑川溫泉 → 別府 → 由布院 → 福岡</p>
+        </header>
+
+        <!-- Day 1 -->
+        <div class="day-card day-1">
+            <div class="day-header">
+                <div>
+                    <h2>Day 1 - 熊本探索</h2>
+                    <span class="date">2月16日（日）</span>
+                </div>
+                <span class="accommodation">🏨 宿：熊本</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">09:00 - 12:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🏯 熊本城</h3>
+                        <p>日本三大名城之一，欣賞震災後修復的天守閣</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">12:00 - 13:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🍱 櫻之馬場城彩苑</h3>
+                        <p>城下町風情商店街，享用午餐與選購伴手禮</p>
+                        <span class="tag tag-food">美食</span>
+                        <span class="tag tag-shopping">購物</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">14:00 - 14:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🌆 熊本市役所十四樓展望台</h3>
+                        <p>免費展望台，俯瞰熊本市區與熊本城全景</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">15:00 - 16:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🐻 熊本熊廣場</h3>
+                        <p>觀看熊本熊部長表演（請事先查詢活動時間）</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">16:30 - 17:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🛍️ 肥後YOKAMON市場</h3>
+                        <p>必買：TRANDOR半熟蛋咖哩麵包、MIGNON泡芙</p>
+                        <span class="tag tag-shopping">購物</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">18:30 - 20:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🥩 晚餐：馬櫻</h3>
+                        <p>品嚐熊本名物馬肉料理</p>
+                        <span class="tag tag-food">美食</span>
+                        <span class="tag tag-reservation">需預約</span>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                <h4>注意事項</h4>
+                <ul>
+                    <li>熊本熊廣場表演時間需事先上官網確認</li>
+                    <li>馬櫻晚餐需提前預約</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-card day-2">
+            <div class="day-header">
+                <div>
+                    <h2>Day 2 - 阿蘇火山之旅</h2>
+                    <span class="date">2月17日（一）</span>
+                </div>
+                <span class="accommodation">🏨 宿：高千穗</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">08:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚗 取車出發</h3>
+                        <p>開始自駕之旅，前往阿蘇方向</p>
+                        <span class="tag tag-transport">交通</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">09:00 - 09:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚏 大津道之驛</h3>
+                        <p>休息站，補充零食飲料</p>
+                        <span class="tag tag-shopping">休息站</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">10:00 - 10:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚏 阿蘇道之驛</h3>
+                        <p>阿蘇特產與當地農產品</p>
+                        <span class="tag tag-shopping">休息站</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">11:00 - 12:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🌋 阿蘇山上廣場 → 火山口</h3>
+                        <p>搭乘接駁車參觀活火山口（視火山活動狀況開放）</p>
+                        <span class="tag tag-nature">自然景觀</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">12:30 - 14:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🌿 草千里 + 午餐</h3>
+                        <p>草千里景觀餐廳享用午餐，欣賞大草原風光</p>
+                        <span class="tag tag-nature">自然景觀</span>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">16:00 - 17:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>⛩️ 高千穗神社</h3>
+                        <p>日本神話發源地，莊嚴神聖的能量景點</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                <h4>注意事項</h4>
+                <ul>
+                    <li>阿蘇火山口可能因火山活動而關閉，建議出發前確認</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="day-card day-3">
+            <div class="day-header">
+                <div>
+                    <h2>Day 3 - 高千穗秘境</h2>
+                    <span class="date">2月18日（二）</span>
+                </div>
+                <span class="accommodation">🏨 宿：黑川溫泉</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">08:30 - 10:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚣 高千穗峽划船</h3>
+                        <p>穿梭於絕美峽谷，欣賞真名井瀑布</p>
+                        <span class="tag tag-nature">自然景觀</span>
+                        <span class="tag tag-reservation">需預約</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">12:00 - 13:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🥩 午餐：高千穂牛レストラン和</h3>
+                        <p>品嚐當地高千穗牛燒肉</p>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">14:00 - 15:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚂 高千穗天照鐵道小火車</h3>
+                        <p>搭乘觀光小火車，穿越高架鐵橋欣賞峽谷美景</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">15:30 - 16:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚏 高千穗道之驛</h3>
+                        <p>選購當地特產與紀念品</p>
+                        <span class="tag tag-shopping">休息站</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">18:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>♨️ 抵達黑川溫泉</h3>
+                        <p>入住溫泉旅館，享受露天風呂</p>
+                        <span class="tag tag-nature">溫泉</span>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                <h4>注意事項</h4>
+                <ul>
+                    <li>划船需提前預約，冬季可能因天候暫停</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="day-card day-4">
+            <div class="day-header">
+                <div>
+                    <h2>Day 4 - 別府地獄巡禮</h2>
+                    <span class="date">2月19日（三）</span>
+                </div>
+                <span class="accommodation">🏨 宿：別府</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">09:00 - 10:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🌉 九重夢大吊橋</h3>
+                        <p>日本最高的步行者專用吊橋，壯麗山谷景色</p>
+                        <span class="tag tag-nature">自然景觀</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">12:00 - 13:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🍜 別府午餐</h3>
+                        <p>品嚐別府在地美食</p>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">14:00 - 15:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚡 別府空中纜車</h3>
+                        <p>搭乘纜車登上鶴見岳，俯瞰別府灣全景</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">16:00 - 18:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🔥 別府地獄巡禮</h3>
+                        <p>參觀海地獄、血池地獄等特色溫泉景觀</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">18:30 - 19:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>💊 Cosmos 藥妝店</h3>
+                        <p>採購日本藥妝與生活用品</p>
+                        <span class="tag tag-shopping">購物</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="day-card day-5">
+            <div class="day-header">
+                <div>
+                    <h2>Day 5 - 由布院悠閒日</h2>
+                    <span class="date">2月20日（四）</span>
+                </div>
+                <span class="accommodation">🏨 宿：由布院</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">09:00 - 12:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🦁 九州自然動物園</h3>
+                        <p>搭乘叢林巴士近距離接觸野生動物</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">13:00 - 14:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🍽️ 午餐</h3>
+                        <p>由布院特色餐廳用餐</p>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">14:30 - 17:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🌅 金鱗湖 / 湯之坪街道</h3>
+                        <p>漫步夢幻金鱗湖，逛逛湯之坪特色小店</p>
+                        <span class="tag tag-nature">自然景觀</span>
+                        <span class="tag tag-shopping">購物</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="day-card day-6">
+            <div class="day-header">
+                <div>
+                    <h2>Day 6 - 返回福岡</h2>
+                    <span class="date">2月21日（五）</span>
+                </div>
+                <span class="accommodation">🏨 宿：福岡</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">09:00 - 10:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚏 由布院休息站</h3>
+                        <p>最後巡禮由布院，採購伴手禮</p>
+                        <span class="tag tag-shopping">休息站</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">11:30 - 13:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>⛩️ 太宰府天滿宮</h3>
+                        <p>學問之神菅原道真公的總本社，必吃梅枝餅</p>
+                        <span class="tag tag-attraction">景點</span>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">14:30 - 15:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚏 浮羽休息站</h3>
+                        <p>水果王國，新鮮水果與甜點</p>
+                        <span class="tag tag-shopping">休息站</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">16:00 - 17:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚗 福岡還車</h3>
+                        <p>歸還租車，結束自駕行程</p>
+                        <span class="tag tag-transport">交通</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="day-card day-7">
+            <div class="day-header">
+                <div>
+                    <h2>Day 7 - 福岡市區</h2>
+                    <span class="date">2月22日（六）</span>
+                </div>
+                <span class="accommodation">✈️ 返程</span>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <span class="time">全天</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🏙️ 福岡市區自由行</h3>
+                        <p>推薦景點：博多運河城、天神地下街、中洲屋台</p>
+                        <span class="tag tag-attraction">景點</span>
+                        <span class="tag tag-shopping">購物</span>
+                        <span class="tag tag-food">美食</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🗾 九州自駕七日遊 | 2025年2月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">祝旅途愉快！いってらっしゃい！</p>
+        </footer>
+    </div>
+</body>
+</html>
