@@ -50,6 +50,55 @@
             opacity: 0.9;
         }
 
+        .flight-info {
+            background: var(--white);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .flight-info h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .flight-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .flight-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .flight-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .flight-details {
+            flex: 1;
+        }
+
+        .flight-details .route {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .flight-details .time {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+
         .day-card {
             background: var(--white);
             border-radius: 20px;
@@ -83,11 +132,75 @@
             opacity: 0.9;
         }
 
-        .accommodation {
+        .accommodation-badge {
             background: rgba(255,255,255,0.2);
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
+        }
+
+        .hotel-info {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px 25px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .hotel-info h4 {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hotel-info h4 a {
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .hotel-info h4 a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .hotel-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .hotel-details span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price-tag {
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .status-paid {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .status-pending {
+            background: #ffc107;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
         }
 
         .timeline {
@@ -233,6 +346,16 @@
             .event {
                 flex-wrap: wrap;
             }
+
+            .flight-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .hotel-details {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -243,6 +366,25 @@
             <p>熊本 → 阿蘇 → 高千穗 → 黑川溫泉 → 別府 → 由布院 → 福岡</p>
         </header>
 
+        <!-- Flight Info -->
+        <div class="flight-info">
+            <h3>✈️ 航班資訊</h3>
+            <div class="flight-row">
+                <span class="flight-icon">🛫</span>
+                <div class="flight-details">
+                    <div class="route">去程：台北 → 熊本</div>
+                    <div class="time">2月16日（日）10:35 抵達熊本機場</div>
+                </div>
+            </div>
+            <div class="flight-row">
+                <span class="flight-icon">🛬</span>
+                <div class="flight-details">
+                    <div class="route">回程：福岡 → 台北</div>
+                    <div class="time">2月22日（六）19:10 福岡機場起飛</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Day 1 -->
         <div class="day-card day-1">
             <div class="day-header">
@@ -250,16 +392,26 @@
                     <h2>Day 1 - 熊本探索</h2>
                     <span class="date">2月16日（日）</span>
                 </div>
-                <span class="accommodation">🏨 宿：熊本</span>
+                <span class="accommodation-badge">🏨 宿：熊本</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://hoshinoresorts.com/CH/hotels/0000000314/rooms/0000000003" target="_blank">OMO5 熊本 by 星野集團</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ YAGURA 房 A</span>
+                    <span>👥 3成人1兒童</span>
+                    <span>🍽️ 不含早餐</span>
+                    <span><span class="price-tag">NT$ 3,200</span></span>
+                    <span><span class="status-paid">官網已付款</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
-                    <span class="time">09:00 - 12:00</span>
+                    <span class="time">10:35</span>
                     <span class="dot"></span>
                     <div class="content">
-                        <h3>🏯 熊本城</h3>
-                        <p>日本三大名城之一，欣賞震災後修復的天守閣</p>
-                        <span class="tag tag-attraction">景點</span>
+                        <h3>🛫 抵達熊本機場</h3>
+                        <p>入境、領取行李、前往市區</p>
+                        <span class="tag tag-transport">交通</span>
                     </div>
                 </div>
                 <div class="event">
@@ -273,7 +425,16 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">14:00 - 14:30</span>
+                    <span class="time">13:30 - 16:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🏯 熊本城</h3>
+                        <p>日本三大名城之一，欣賞震災後修復的天守閣</p>
+                        <span class="tag tag-attraction">景點</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">16:00 - 16:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🌆 熊本市役所十四樓展望台</h3>
@@ -282,7 +443,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">15:00 - 16:00</span>
+                    <span class="time">17:00 - 18:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🐻 熊本熊廣場</h3>
@@ -291,7 +452,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">16:30 - 17:30</span>
+                    <span class="time">18:00 - 18:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🛍️ 肥後YOKAMON市場</h3>
@@ -300,7 +461,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">18:30 - 20:00</span>
+                    <span class="time">19:00 - 20:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🥩 晚餐：馬櫻</h3>
@@ -326,7 +487,17 @@
                     <h2>Day 2 - 阿蘇火山之旅</h2>
                     <span class="date">2月17日（一）</span>
                 </div>
-                <span class="accommodation">🏨 宿：高千穗</span>
+                <span class="accommodation-badge">🏨 宿：高千穗</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://www.agoda.com/sl/eQk4YiI18Ko" target="_blank">SOLEST 高千穗飯店</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ 標準房 - 2張小型雙人床</span>
+                    <span>👥 2成人2兒童（需另外告知）</span>
+                    <span>🍽️ 含早餐</span>
+                    <span><span class="price-tag">NT$ 4,843</span></span>
+                    <span><span class="status-paid">Agoda 已付款</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
@@ -389,6 +560,7 @@
                 <h4>注意事項</h4>
                 <ul>
                     <li>阿蘇火山口可能因火山活動而關閉，建議出發前確認</li>
+                    <li>飯店需另外告知有2位兒童同行</li>
                 </ul>
             </div>
         </div>
@@ -400,7 +572,17 @@
                     <h2>Day 3 - 高千穗秘境</h2>
                     <span class="date">2月18日（二）</span>
                 </div>
-                <span class="accommodation">🏨 宿：黑川溫泉</span>
+                <span class="accommodation-badge">🏨 宿：黑川溫泉</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://www.booking.com/hotel/jp/ryokan-wakaba.zh-tw.html" target="_blank">若葉日式旅館 Ryokan Wakaba</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ 日式客房 - 帶私人浴室（北樓）</span>
+                    <span>👥 2成人2兒童</span>
+                    <span>🍽️ 含早餐 + 晚餐</span>
+                    <span><span class="price-tag">NT$ 18,068</span></span>
+                    <span><span class="status-pending">Booking 延後扣款</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
@@ -445,8 +627,9 @@
                     <span class="dot"></span>
                     <div class="content">
                         <h3>♨️ 抵達黑川溫泉</h3>
-                        <p>入住溫泉旅館，享受露天風呂</p>
+                        <p>入住溫泉旅館，享受露天風呂與會席料理晚餐</p>
                         <span class="tag tag-nature">溫泉</span>
+                        <span class="tag tag-food">晚餐</span>
                     </div>
                 </div>
             </div>
@@ -454,6 +637,7 @@
                 <h4>注意事項</h4>
                 <ul>
                     <li>划船需提前預約，冬季可能因天候暫停</li>
+                    <li>旅館含早晚餐，請準時回旅館用餐</li>
                 </ul>
             </div>
         </div>
@@ -465,7 +649,17 @@
                     <h2>Day 4 - 別府地獄巡禮</h2>
                     <span class="date">2月19日（三）</span>
                 </div>
-                <span class="accommodation">🏨 宿：別府</span>
+                <span class="accommodation-badge">🏨 宿：別府</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://go-superhotel.reservation.jp/zh-tw/hotels/sh-beppu" target="_blank">別府站前超級飯店 Super Hotel</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ 禁菸好萊塢雙床房</span>
+                    <span>👥 2成人2兒童</span>
+                    <span>🍽️ 含免費早餐</span>
+                    <span><span class="price-tag">NT$ 3,787</span></span>
+                    <span><span class="status-pending">Agoda 延後扣款</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
@@ -523,7 +717,17 @@
                     <h2>Day 5 - 由布院悠閒日</h2>
                     <span class="date">2月20日（四）</span>
                 </div>
-                <span class="accommodation">🏨 宿：由布院</span>
+                <span class="accommodation-badge">🏨 宿：由布院</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://www.yawaraginosato.com/zh-tw/" target="_blank">溫柔之鄉 Yawaraginosato Yadoya</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ 和洋式客房</span>
+                    <span>👥 2成人2兒童</span>
+                    <span>🍽️ 含晚餐</span>
+                    <span><span class="price-tag">NT$ 12,988</span></span>
+                    <span><span class="status-pending">Agoda 延後扣款</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
@@ -554,6 +758,15 @@
                         <span class="tag tag-shopping">購物</span>
                     </div>
                 </div>
+                <div class="event">
+                    <span class="time">18:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🍽️ 旅館晚餐</h3>
+                        <p>享用旅館精緻晚餐</p>
+                        <span class="tag tag-food">晚餐</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -564,7 +777,17 @@
                     <h2>Day 6 - 返回福岡</h2>
                     <span class="date">2月21日（五）</span>
                 </div>
-                <span class="accommodation">🏨 宿：福岡</span>
+                <span class="accommodation-badge">🏨 宿：福岡</span>
+            </div>
+            <div class="hotel-info">
+                <h4>🏨 <a href="https://www.toyoko-inn.com/china/search/detail/00043" target="_blank">東橫INN 博多口站前</a></h4>
+                <div class="hotel-details">
+                    <span>🛏️ 單人房 × 2間</span>
+                    <span>👥 分開訂房</span>
+                    <span>🍽️ 含免費早餐</span>
+                    <span><span class="price-tag">¥11,410 + ¥11,800 ≈ NT$ 4,654</span></span>
+                    <span><span class="status-pending">現場付款（可用積分折抵）</span></span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="event">
@@ -605,6 +828,13 @@
                     </div>
                 </div>
             </div>
+            <div class="notes">
+                <h4>注意事項</h4>
+                <ul>
+                    <li>東橫INN 房間1：onion523@gmail.com（積分折抵）</li>
+                    <li>東橫INN 房間2：lean.lean@gmail.com（現場辦會員卡）</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Day 7 -->
@@ -614,11 +844,11 @@
                     <h2>Day 7 - 福岡市區</h2>
                     <span class="date">2月22日（六）</span>
                 </div>
-                <span class="accommodation">✈️ 返程</span>
+                <span class="accommodation-badge">✈️ 19:10 返程</span>
             </div>
             <div class="timeline">
                 <div class="event">
-                    <span class="time">全天</span>
+                    <span class="time">09:00 - 15:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🏙️ 福岡市區自由行</h3>
@@ -628,11 +858,29 @@
                         <span class="tag tag-food">美食</span>
                     </div>
                 </div>
+                <div class="event">
+                    <span class="time">16:00</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🚃 前往福岡機場</h3>
+                        <p>預留充足時間辦理登機手續</p>
+                        <span class="tag tag-transport">交通</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">19:10</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>✈️ 福岡起飛返回台北</h3>
+                        <p>結束美好的九州之旅</p>
+                        <span class="tag tag-transport">航班</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <footer>
-            <p>🗾 九州自駕七日遊 | 2025年2月</p>
+            <p>🗾 九州自駕七日遊 | 2025年2月16日 - 22日</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">祝旅途愉快！いってらっしゃい！</p>
         </footer>
     </div>
