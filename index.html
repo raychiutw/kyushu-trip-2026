@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 九州七日遊行程表</title>
+    <title>2026 九州七日遊行程表</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #e74c3c;
-            --secondary: #3498db;
-            --accent: #f39c12;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --white: #ffffff;
+            --sky-blue: #87CEEB;
+            --soft-green: #98D4A1;
+            --cream: #FDF5E6;
+            --warm-brown: #8B7355;
+            --totoro-gray: #708090;
+            --sakura-pink: #FFB7C5;
+            --forest-green: #228B22;
+            --cloud-white: #F5F5F5;
+            --sunset-orange: #FFAA5C;
+            --ocean-blue: #4A90A4;
         }
 
         * {
@@ -23,55 +27,138 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 30%, #98D4A1 70%, #90EE90 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+        }
+
+        /* 雲朵裝飾 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50px;
+            left: 10%;
+            width: 200px;
+            height: 60px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50px;
+            box-shadow:
+                60px -20px 0 -10px rgba(255,255,255,0.8),
+                -40px -10px 0 -15px rgba(255,255,255,0.8);
+            animation: float 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 120px;
+            right: 15%;
+            width: 150px;
+            height: 45px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 40px;
+            box-shadow:
+                40px -15px 0 -8px rgba(255,255,255,0.6),
+                -30px -8px 0 -12px rgba(255,255,255,0.6);
+            animation: float 10s ease-in-out infinite reverse;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         header {
             text-align: center;
             padding: 40px 20px;
-            color: var(--white);
+            background: rgba(255,255,255,0.85);
+            border-radius: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid var(--warm-brown);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🌸';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 2rem;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '🍃';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            animation: sway 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
         }
 
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: var(--warm-brown);
+            text-shadow: 2px 2px 0 rgba(255,255,255,0.8);
         }
 
         header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            color: var(--totoro-gray);
+        }
+
+        .departure-info {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--sakura-pink), #FFD1DC);
+            border-radius: 20px;
+            display: inline-block;
+            color: var(--warm-brown);
+            font-weight: 500;
         }
 
         .flight-info {
-            background: var(--white);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 25px;
             margin-bottom: 25px;
             padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid var(--ocean-blue);
         }
 
         .flight-info h3 {
-            color: var(--dark);
+            color: var(--ocean-blue);
             margin-bottom: 15px;
             font-size: 1.2rem;
         }
 
         .flight-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #E0F4FF, #B0E0E6);
+            border-radius: 15px;
             margin-bottom: 10px;
+            border: 2px dashed var(--ocean-blue);
         }
 
         .flight-row:last-child {
@@ -89,42 +176,50 @@
 
         .flight-details .route {
             font-weight: 600;
-            color: var(--dark);
+            color: var(--warm-brown);
             font-size: 1.1rem;
         }
 
         .flight-details .time {
-            color: #666;
+            color: var(--totoro-gray);
             font-size: 0.9rem;
             margin-top: 3px;
         }
 
         .day-card {
-            background: var(--white);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 25px;
             margin-bottom: 25px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid var(--warm-brown);
+            transition: transform 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
         }
 
         .day-header {
             padding: 20px 25px;
-            color: var(--white);
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
-        .day-1 .day-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .day-2 .day-header { background: linear-gradient(135deg, #e67e22, #d35400); }
-        .day-3 .day-header { background: linear-gradient(135deg, #27ae60, #1e8449); }
-        .day-4 .day-header { background: linear-gradient(135deg, #3498db, #2980b9); }
-        .day-5 .day-header { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-        .day-6 .day-header { background: linear-gradient(135deg, #1abc9c, #16a085); }
-        .day-7 .day-header { background: linear-gradient(135deg, #34495e, #2c3e50); }
+        .day-1 .day-header { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+        .day-2 .day-header { background: linear-gradient(135deg, #FFA94D, #FFD93D); }
+        .day-3 .day-header { background: linear-gradient(135deg, #51CF66, #8CE99A); }
+        .day-4 .day-header { background: linear-gradient(135deg, #339AF0, #74C0FC); }
+        .day-5 .day-header { background: linear-gradient(135deg, #CC5DE8, #E599F7); }
+        .day-6 .day-header { background: linear-gradient(135deg, #20C997, #63E6BE); }
+        .day-7 .day-header { background: linear-gradient(135deg, #868E96, #ADB5BD); }
 
         .day-header h2 {
             font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .day-header .date {
@@ -133,20 +228,21 @@
         }
 
         .accommodation-badge {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.3);
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
+            backdrop-filter: blur(5px);
         }
 
         .hotel-info {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: linear-gradient(135deg, var(--cream), #FFF8DC);
             padding: 20px 25px;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 2px dashed var(--warm-brown);
         }
 
         .hotel-info h4 {
-            color: var(--dark);
+            color: var(--warm-brown);
             font-size: 1.1rem;
             margin-bottom: 10px;
             display: flex;
@@ -155,13 +251,14 @@
         }
 
         .hotel-info h4 a {
-            color: var(--dark);
+            color: var(--warm-brown);
             text-decoration: none;
+            border-bottom: 2px dotted var(--warm-brown);
         }
 
         .hotel-info h4 a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
+            color: var(--forest-green);
+            border-color: var(--forest-green);
         }
 
         .hotel-details {
@@ -179,26 +276,26 @@
         }
 
         .price-tag {
-            background: #28a745;
+            background: linear-gradient(135deg, var(--forest-green), #32CD32);
             color: white;
-            padding: 3px 10px;
+            padding: 3px 12px;
             border-radius: 15px;
             font-weight: 600;
             font-size: 0.85rem;
         }
 
         .status-paid {
-            background: #28a745;
+            background: linear-gradient(135deg, var(--forest-green), #32CD32);
             color: white;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 10px;
             font-size: 0.75rem;
         }
 
         .status-pending {
-            background: #ffc107;
+            background: linear-gradient(135deg, var(--sunset-orange), #FFD700);
             color: #333;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 10px;
             font-size: 0.75rem;
         }
@@ -223,8 +320,9 @@
             left: 55px;
             top: 35px;
             bottom: -20px;
-            width: 2px;
-            background: #e0e0e0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--soft-green), var(--sky-blue));
+            border-radius: 2px;
         }
 
         .event:last-child::before {
@@ -234,42 +332,43 @@
         .time {
             min-width: 110px;
             font-weight: 500;
-            color: var(--dark);
+            color: var(--warm-brown);
             font-size: 0.95rem;
         }
 
         .dot {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: var(--primary);
             margin-right: 20px;
             margin-top: 5px;
             flex-shrink: 0;
             position: relative;
             z-index: 1;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        .day-1 .dot { background: #e74c3c; }
-        .day-2 .dot { background: #e67e22; }
-        .day-3 .dot { background: #27ae60; }
-        .day-4 .dot { background: #3498db; }
-        .day-5 .dot { background: #9b59b6; }
-        .day-6 .dot { background: #1abc9c; }
-        .day-7 .dot { background: #34495e; }
+        .day-1 .dot { background: #FF6B6B; }
+        .day-2 .dot { background: #FFA94D; }
+        .day-3 .dot { background: #51CF66; }
+        .day-4 .dot { background: #339AF0; }
+        .day-5 .dot { background: #CC5DE8; }
+        .day-6 .dot { background: #20C997; }
+        .day-7 .dot { background: #868E96; }
 
         .content {
             flex: 1;
         }
 
         .content h3 {
-            color: var(--dark);
+            color: var(--warm-brown);
             margin-bottom: 5px;
             font-size: 1.1rem;
         }
 
         .content p {
-            color: #666;
+            color: var(--totoro-gray);
             font-size: 0.9rem;
             line-height: 1.5;
         }
@@ -281,43 +380,44 @@
             font-size: 0.75rem;
             margin-top: 8px;
             margin-right: 5px;
+            border: 1px solid transparent;
         }
 
-        .tag-food { background: #ffeaa7; color: #d63031; }
-        .tag-attraction { background: #dfe6e9; color: #2d3436; }
-        .tag-shopping { background: #a29bfe; color: #fff; }
-        .tag-nature { background: #55efc4; color: #00b894; }
-        .tag-reservation { background: #fd79a8; color: #fff; }
-        .tag-transport { background: #74b9ff; color: #0984e3; }
+        .tag-food { background: #FFF3BF; color: #E67700; border-color: #FFD43B; }
+        .tag-attraction { background: #E7F5FF; color: #1971C2; border-color: #74C0FC; }
+        .tag-shopping { background: #F3D9FA; color: #9C36B5; border-color: #E599F7; }
+        .tag-nature { background: #D3F9D8; color: #2B8A3E; border-color: #8CE99A; }
+        .tag-reservation { background: #FFE3E3; color: #C92A2A; border-color: #FFA8A8; }
+        .tag-transport { background: #D0EBFF; color: #1864AB; border-color: #74C0FC; }
 
         .notes {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+            background: linear-gradient(135deg, #FFF9DB, #FFF3BF);
+            border-left: 5px solid var(--sunset-orange);
             padding: 15px 20px;
             margin: 20px 25px 25px;
-            border-radius: 0 10px 10px 0;
+            border-radius: 0 15px 15px 0;
         }
 
         .notes h4 {
-            color: #856404;
+            color: #E67700;
             margin-bottom: 8px;
             font-size: 0.95rem;
         }
 
         .notes ul {
             list-style: none;
-            color: #856404;
+            color: #74603D;
             font-size: 0.9rem;
         }
 
         .notes ul li {
             margin-bottom: 5px;
-            padding-left: 20px;
+            padding-left: 25px;
             position: relative;
         }
 
         .notes ul li::before {
-            content: '⚠️';
+            content: '🌰';
             position: absolute;
             left: 0;
         }
@@ -325,7 +425,19 @@
         footer {
             text-align: center;
             padding: 30px;
-            color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.85);
+            border-radius: 25px;
+            border: 3px solid var(--warm-brown);
+            color: var(--warm-brown);
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        .totoro-decoration {
+            font-size: 3rem;
+            margin: 10px 0;
         }
 
         @media (max-width: 600px) {
@@ -356,14 +468,19 @@
             .hotel-details {
                 grid-template-columns: 1fr;
             }
+
+            body::before, body::after {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🌸 2025 九州七日遊 🗾</h1>
+            <h1>🌸 2026 九州七日遊 🗾</h1>
             <p>熊本 → 阿蘇 → 高千穗 → 黑川溫泉 → 別府 → 由布院 → 福岡</p>
+            <div class="departure-info">📍 出發地點：新北市板橋區</div>
         </header>
 
         <!-- Flight Info -->
@@ -372,15 +489,15 @@
             <div class="flight-row">
                 <span class="flight-icon">🛫</span>
                 <div class="flight-details">
-                    <div class="route">去程：台北 → 熊本</div>
-                    <div class="time">2月16日（日）10:35 抵達熊本機場</div>
+                    <div class="route">去程：桃園 → 熊本</div>
+                    <div class="time">2月16日（一）07:30 桃園機場起飛 → 10:35 抵達熊本機場</div>
                 </div>
             </div>
             <div class="flight-row">
                 <span class="flight-icon">🛬</span>
                 <div class="flight-details">
-                    <div class="route">回程：福岡 → 台北</div>
-                    <div class="time">2月22日（六）19:10 福岡機場起飛</div>
+                    <div class="route">回程：福岡 → 桃園</div>
+                    <div class="time">2月22日（日）19:10 福岡機場起飛</div>
                 </div>
             </div>
         </div>
@@ -390,7 +507,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 1 - 熊本探索</h2>
-                    <span class="date">2月16日（日）</span>
+                    <span class="date">2月16日（一）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：熊本</span>
             </div>
@@ -412,6 +529,15 @@
                         <h3>🛫 抵達熊本機場</h3>
                         <p>入境、領取行李、前往市區</p>
                         <span class="tag tag-transport">交通</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">11:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🏨 飯店寄放行李</h3>
+                        <p>前往 OMO5 熊本寄放行李，輕裝出發</p>
+                        <span class="tag tag-transport">寄放行李</span>
                     </div>
                 </div>
                 <div class="event">
@@ -485,7 +611,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 2 - 阿蘇火山之旅</h2>
-                    <span class="date">2月17日（一）</span>
+                    <span class="date">2月17日（二）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：高千穗</span>
             </div>
@@ -501,7 +627,16 @@
             </div>
             <div class="timeline">
                 <div class="event">
-                    <span class="time">08:00</span>
+                    <span class="time">09:00 - 10:30</span>
+                    <span class="dot"></span>
+                    <div class="content">
+                        <h3>🍳 早餐 & 準備出發</h3>
+                        <p>飯店早餐後整理行李，前往租車點</p>
+                        <span class="tag tag-food">早餐</span>
+                    </div>
+                </div>
+                <div class="event">
+                    <span class="time">10:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚗 取車出發</h3>
@@ -510,7 +645,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">09:00 - 09:30</span>
+                    <span class="time">11:30 - 12:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚏 大津道之驛</h3>
@@ -519,7 +654,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">10:00 - 10:30</span>
+                    <span class="time">12:30 - 13:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚏 阿蘇道之驛</h3>
@@ -528,7 +663,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">11:00 - 12:00</span>
+                    <span class="time">13:30 - 14:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🌋 阿蘇山上廣場 → 火山口</h3>
@@ -537,7 +672,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">12:30 - 14:00</span>
+                    <span class="time">15:00 - 16:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🌿 草千里 + 午餐</h3>
@@ -547,7 +682,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">16:00 - 17:00</span>
+                    <span class="time">18:00 - 19:00</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>⛩️ 高千穗神社</h3>
@@ -570,7 +705,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 3 - 高千穗秘境</h2>
-                    <span class="date">2月18日（二）</span>
+                    <span class="date">2月18日（三）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：黑川溫泉</span>
             </div>
@@ -586,7 +721,7 @@
             </div>
             <div class="timeline">
                 <div class="event">
-                    <span class="time">08:30 - 10:00</span>
+                    <span class="time">09:00 - 10:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚣 高千穗峽划船</h3>
@@ -647,7 +782,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 4 - 別府地獄巡禮</h2>
-                    <span class="date">2月19日（三）</span>
+                    <span class="date">2月19日（四）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：別府</span>
             </div>
@@ -715,7 +850,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 5 - 由布院悠閒日</h2>
-                    <span class="date">2月20日（四）</span>
+                    <span class="date">2月20日（五）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：由布院</span>
             </div>
@@ -775,7 +910,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 6 - 返回福岡</h2>
-                    <span class="date">2月21日（五）</span>
+                    <span class="date">2月21日（六）</span>
                 </div>
                 <span class="accommodation-badge">🏨 宿：福岡</span>
             </div>
@@ -819,7 +954,7 @@
                     </div>
                 </div>
                 <div class="event">
-                    <span class="time">16:00 - 17:00</span>
+                    <span class="time">18:30</span>
                     <span class="dot"></span>
                     <div class="content">
                         <h3>🚗 福岡還車</h3>
@@ -842,7 +977,7 @@
             <div class="day-header">
                 <div>
                     <h2>Day 7 - 福岡市區</h2>
-                    <span class="date">2月22日（六）</span>
+                    <span class="date">2月22日（日）</span>
                 </div>
                 <span class="accommodation-badge">✈️ 19:10 返程</span>
             </div>
@@ -880,8 +1015,9 @@
         </div>
 
         <footer>
-            <p>🗾 九州自駕七日遊 | 2025年2月16日 - 22日</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">祝旅途愉快！いってらっしゃい！</p>
+            <div class="totoro-decoration">🌳🚶‍♂️🌸</div>
+            <p>🗾 九州自駕七日遊 | 2026年2月16日 - 22日</p>
+            <p style="font-size: 0.9rem;">祝旅途愉快！いってらっしゃい！</p>
         </footer>
     </div>
 </body>
