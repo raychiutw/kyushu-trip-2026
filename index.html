@@ -2446,6 +2446,65 @@
             container.innerHTML = html;
         }
 
+        var WMO_DESC = {
+            0: '\u6674\u5929', 1: '\u5927\u81F4\u6674\u6717', 2: '\u591A\u96F2\u6642\u6674', 3: '\u9670\u5929',
+            45: '\u9727', 48: '\u9727',
+            51: '\u5C0F\u96E8', 53: '\u4E2D\u96E8', 55: '\u5927\u96E8',
+            56: '\u51CD\u96E8', 57: '\u51CD\u96E8',
+            61: '\u5C0F\u96E8', 63: '\u4E2D\u96E8', 65: '\u5927\u96E8',
+            66: '\u51CD\u96E8', 67: '\u51CD\u96E8',
+            71: '\u5C0F\u96EA', 73: '\u4E2D\u96EA', 75: '\u5927\u96EA', 77: '\u96EA\u7C92',
+            80: '\u9663\u96E8', 81: '\u4E2D\u9663\u96E8', 82: '\u5927\u9663\u96E8',
+            85: '\u5C0F\u9663\u96EA', 86: '\u5927\u9663\u96EA',
+            95: '\u96F7\u66B4', 96: '\u96F7\u66B4', 99: '\u96F7\u66B4'
+        };
+
+        function updateSummary(container, data) {
+            var summaryEl = container.previousElementSibling;
+            if (!summaryEl || !summaryEl.classList.contains('weather-info')) return;
+            var hourly = data.hourly;
+            var temps = hourly.temperature_2m;
+            var rains = hourly.precipitation_probability || [];
+            var snows = hourly.snowfall || [];
+            var codes = hourly.weather_code || [];
+
+            var minTemp = Math.round(Math.min.apply(null, temps));
+            var maxTemp = Math.round(Math.max.apply(null, temps));
+            var minRain = Math.min.apply(null, rains);
+            var maxRain = Math.max.apply(null, rains);
+            var maxSnow = Math.max.apply(null, snows);
+
+            // Determine overall weather from most common code during daytime (6-18)
+            var codeCounts = {};
+            for (var h = 6; h <= 18; h++) {
+                var c = codes[h];
+                codeCounts[c] = (codeCounts[c] || 0) + 1;
+            }
+            var mainCode = 0, maxCount = 0;
+            for (var c in codeCounts) {
+                if (codeCounts[c] > maxCount) { maxCount = codeCounts[c]; mainCode = parseInt(c); }
+            }
+
+            var weatherDesc = WMO_DESC[mainCode] || '\u591A\u96F2';
+            var weatherIcon = getIcon(mainCode);
+
+            var grid = summaryEl.querySelector('div[style*="grid"]');
+            if (grid && grid.children.length >= 4) {
+                grid.children[0].innerHTML = '\uD83C\uDF21\uFE0F <strong>\u6C23\u6EAB\uFF1A</strong>' + minTemp + '\u00B0C ~ ' + maxTemp + '\u00B0C';
+                grid.children[1].innerHTML = weatherIcon + ' <strong>\u5929\u6C23\uFF1A</strong>' + weatherDesc;
+                if (minRain === maxRain) {
+                    grid.children[2].innerHTML = '\uD83D\uDCA7 <strong>\u964D\u96E8\u6A5F\u7387\uFF1A</strong>' + maxRain + '%';
+                } else {
+                    grid.children[2].innerHTML = '\uD83D\uDCA7 <strong>\u964D\u96E8\u6A5F\u7387\uFF1A</strong>' + minRain + '% ~ ' + maxRain + '%';
+                }
+                if (maxSnow > 0) {
+                    grid.children[3].innerHTML = '\u2744\uFE0F <strong>\u964D\u96EA\u91CF\uFF1A</strong>' + maxSnow.toFixed(1) + 'cm';
+                } else {
+                    grid.children[3].innerHTML = '\u2744\uFE0F <strong>\u964D\u96EA\uFF1A</strong>\u7121';
+                }
+            }
+        }
+
         function fetchDay(day) {
             var container = document.getElementById(day.id);
             if (!container) return;
@@ -2464,6 +2523,7 @@
                 })
                 .then(function(data) {
                     renderHourly(container, data, day.label);
+                    updateSummary(container, data);
                 })
                 .catch(function(err) {
                     container.innerHTML = '<div class="hw-error">'
