@@ -406,8 +406,12 @@
             box-shadow: none !important;
             animation: none !important;
         }
-        .print-mode .hourly-table .hw-label {
+        .print-mode .hw-block {
             background: #fff !important;
+            border-color: #ccc !important;
+        }
+        .print-mode .hw-block-loc {
+            background: #666 !important;
         }
         .print-mode h1,
         .print-mode h2,
@@ -501,45 +505,56 @@
             font-size: 0.72rem;
             color: #999;
         }
-        .hourly-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            padding-bottom: 4px;
+        .hw-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
         }
-        .hourly-table {
-            width: 100%;
-            border-collapse: collapse;
-            white-space: nowrap;
-            font-size: 0.78rem;
-        }
-        .hourly-table th,
-        .hourly-table td {
-            padding: 4px 6px;
+        .hw-block {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 8px 6px;
             text-align: center;
-            min-width: 46px;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: box-shadow 0.2s;
         }
-        .hourly-table th {
+        .hw-block:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .hw-block-time {
+            font-size: 0.7rem;
             font-weight: 600;
             color: #555;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-            font-size: 0.73rem;
+            margin-bottom: 3px;
         }
-        .hourly-table .hw-label {
-            text-align: left;
-            min-width: 65px;
-            font-weight: 600;
-            color: #666;
-            position: sticky;
-            left: 0;
-            background: rgba(255,255,255,0.95);
-            z-index: 1;
-            padding-right: 8px;
+        .hw-block-loc {
+            font-size: 0.65rem;
+            color: #fff;
+            border-radius: 8px;
+            padding: 1px 7px;
+            display: inline-block;
+            margin-bottom: 3px;
+            line-height: 1.5;
         }
-        .hw-icon-row td { font-size: 1.1rem; padding: 2px 6px; }
-        .hw-temp-row td { font-weight: 700; color: #E65100; }
-        .hw-rain-row td { color: #1565C0; }
-        .hw-snow-row td { color: #7B1FA2; }
+        .hw-loc-0 { background: #1565C0; }
+        .hw-loc-1 { background: #E65100; }
+        .hw-loc-2 { background: #2E7D32; }
+        .hw-loc-3 { background: #6A1B9A; }
+        .hw-block-icon { font-size: 1.3rem; line-height: 1.3; }
+        .hw-block-temp {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #E65100;
+            margin: 1px 0;
+        }
+        .hw-block-rain {
+            font-size: 0.7rem;
+            color: #1565C0;
+        }
+        .hw-block-rain.hw-rain-high { color: #0D47A1; font-weight: 700; }
+        .hw-block-snow {
+            font-size: 0.7rem;
+            color: #7B1FA2;
+        }
+        .hw-block-snow.hw-snow-active { font-weight: 700; }
         .hw-loading {
             text-align: center;
             padding: 12px;
@@ -554,8 +569,9 @@
             background: #FFEBEE;
             border-radius: 8px;
         }
-        .hw-rain-high { color: #0D47A1; font-weight: 700; }
-        .hw-snow-active { color: #4A148C; font-weight: 700; }
+        @media (max-width: 600px) {
+            .hw-grid { grid-template-columns: repeat(2, 1fr); }
+        }
 
         /* 列印媒體查詢 */
         @media print {
@@ -594,8 +610,12 @@
                 box-shadow: none !important;
                 animation: none !important;
             }
-            .hourly-table .hw-label {
+            .hw-block {
                 background: #fff !important;
+                border-color: #ccc !important;
+            }
+            .hw-block-loc {
+                background: #666 !important;
             }
             h1, h2, h3, h4, p, span, a, td, li, div {
                 color: #000 !important;
@@ -2364,13 +2384,42 @@
     <script>
     (function() {
         var DAYS = [
-            { id: 'hourly-1', lat: 32.8032, lon: 130.7079, date: '2026-02-16', label: '熊本' },
-            { id: 'hourly-2', lat: 32.8842, lon: 131.0736, date: '2026-02-17', label: '阿蘇・高千穗' },
-            { id: 'hourly-3', lat: 33.0900, lon: 131.0730, date: '2026-02-18', label: '高千穗・黑川溫泉' },
-            { id: 'hourly-4', lat: 33.2846, lon: 131.4914, date: '2026-02-19', label: '別府' },
-            { id: 'hourly-5', lat: 33.2714, lon: 131.3681, date: '2026-02-20', label: '由布院' },
-            { id: 'hourly-6', lat: 33.5902, lon: 130.4017, date: '2026-02-21', label: '太宰府・福岡' },
-            { id: 'hourly-7', lat: 33.5902, lon: 130.4017, date: '2026-02-22', label: '福岡' }
+            { id: 'hourly-1', date: '2026-02-16', label: '\u718A\u672C',
+              locations: [
+                { lat: 32.8032, lon: 130.7079, name: '\u718A\u672C', start: 0, end: 23 }
+            ]},
+            { id: 'hourly-2', date: '2026-02-17', label: '\u963F\u8607\u30FB\u9AD8\u5343\u7A57',
+              locations: [
+                { lat: 32.8032, lon: 130.7079, name: '\u718A\u672C', start: 0, end: 10 },
+                { lat: 32.8842, lon: 131.0736, name: '\u963F\u8607', start: 11, end: 16 },
+                { lat: 32.7133, lon: 131.3057, name: '\u9AD8\u5343\u7A57', start: 17, end: 23 }
+            ]},
+            { id: 'hourly-3', date: '2026-02-18', label: '\u9AD8\u5343\u7A57\u30FB\u9ED1\u5DDD\u6EAB\u6CC9',
+              locations: [
+                { lat: 32.7133, lon: 131.3057, name: '\u9AD8\u5343\u7A57', start: 0, end: 14 },
+                { lat: 33.0900, lon: 131.0730, name: '\u9ED1\u5DDD\u6EAB\u6CC9', start: 15, end: 23 }
+            ]},
+            { id: 'hourly-4', date: '2026-02-19', label: '\u5225\u5E9C',
+              locations: [
+                { lat: 33.0900, lon: 131.0730, name: '\u9ED1\u5DDD', start: 0, end: 8 },
+                { lat: 33.1539, lon: 131.1594, name: '\u4E5D\u91CD', start: 9, end: 10 },
+                { lat: 33.2846, lon: 131.4914, name: '\u5225\u5E9C', start: 11, end: 23 }
+            ]},
+            { id: 'hourly-5', date: '2026-02-20', label: '\u7531\u5E03\u9662',
+              locations: [
+                { lat: 33.2846, lon: 131.4914, name: '\u5225\u5E9C', start: 0, end: 11 },
+                { lat: 33.2714, lon: 131.3681, name: '\u7531\u5E03\u9662', start: 12, end: 23 }
+            ]},
+            { id: 'hourly-6', date: '2026-02-21', label: '\u592A\u5BB0\u5E9C\u30FB\u798F\u5CA1',
+              locations: [
+                { lat: 33.2714, lon: 131.3681, name: '\u7531\u5E03\u9662', start: 0, end: 10 },
+                { lat: 33.5177, lon: 130.5353, name: '\u592A\u5BB0\u5E9C', start: 11, end: 15 },
+                { lat: 33.5902, lon: 130.4017, name: '\u798F\u5CA1', start: 16, end: 23 }
+            ]},
+            { id: 'hourly-7', date: '2026-02-22', label: '\u798F\u5CA1',
+              locations: [
+                { lat: 33.5902, lon: 130.4017, name: '\u798F\u5CA1', start: 0, end: 23 }
+            ]}
         ];
 
         var WMO_ICONS = {
@@ -2385,67 +2434,6 @@
             85: '\uD83C\uDF28\uFE0F', 86: '\uD83C\uDF28\uFE0F',
             95: '\u26C8\uFE0F', 96: '\u26C8\uFE0F', 99: '\u26C8\uFE0F'
         };
-
-        function getIcon(code) {
-            return WMO_ICONS[code] || '\uD83C\uDF24\uFE0F';
-        }
-
-        function renderHourly(container, data, label) {
-            var hourly = data.hourly;
-            if (!hourly || !hourly.temperature_2m) {
-                container.innerHTML = '<div class="hw-error">\u26A0\uFE0F \u7121\u6CD5\u53D6\u5F97\u5929\u6C23\u8CC7\u6599</div>';
-                return;
-            }
-            var now = new Date();
-            var html = '<div class="hourly-weather-header">';
-            html += '<span class="hourly-weather-title">\u23F0 ' + label + '\u9010\u6642\u5929\u6C23\u9810\u5831</span>';
-            html += '<span class="hw-update-time">\u66F4\u65B0\uFF1A' + now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' }) + '</span>';
-            html += '</div>';
-            html += '<div class="hourly-table-wrapper"><table class="hourly-table"><thead><tr>';
-            html += '<th class="hw-label"></th>';
-            for (var h = 0; h <= 23; h++) {
-                html += '<th>' + h + ':00</th>';
-            }
-            html += '</tr></thead><tbody>';
-
-            // Weather icon row
-            html += '<tr class="hw-icon-row"><td class="hw-label">\u5929\u6C23</td>';
-            for (var h = 0; h <= 23; h++) {
-                var code = hourly.weather_code ? hourly.weather_code[h] : 0;
-                html += '<td>' + getIcon(code) + '</td>';
-            }
-            html += '</tr>';
-
-            // Temperature row
-            html += '<tr class="hw-temp-row"><td class="hw-label">\uD83C\uDF21\uFE0F \u6C23\u6EAB</td>';
-            for (var h = 0; h <= 23; h++) {
-                var temp = Math.round(hourly.temperature_2m[h]);
-                html += '<td>' + temp + '\u00B0</td>';
-            }
-            html += '</tr>';
-
-            // Rain probability row
-            html += '<tr class="hw-rain-row"><td class="hw-label">\uD83D\uDCA7 \u964D\u96E8</td>';
-            for (var h = 0; h <= 23; h++) {
-                var rain = hourly.precipitation_probability ? hourly.precipitation_probability[h] : 0;
-                var cls = rain >= 50 ? ' class="hw-rain-high"' : '';
-                html += '<td' + cls + '>' + rain + '%</td>';
-            }
-            html += '</tr>';
-
-            // Snow row
-            html += '<tr class="hw-snow-row"><td class="hw-label">\u2744\uFE0F \u964D\u96EA</td>';
-            for (var h = 0; h <= 23; h++) {
-                var snow = hourly.snowfall ? hourly.snowfall[h] : 0;
-                var cls = snow > 0 ? ' class="hw-snow-active"' : '';
-                html += '<td' + cls + '>' + (snow > 0 ? snow.toFixed(1) + 'cm' : '-') + '</td>';
-            }
-            html += '</tr>';
-
-            html += '</tbody></table></div>';
-            container.innerHTML = html;
-        }
-
         var WMO_DESC = {
             0: '\u6674\u5929', 1: '\u5927\u81F4\u6674\u6717', 2: '\u591A\u96F2\u6642\u6674', 3: '\u9670\u5929',
             45: '\u9727', 48: '\u9727',
@@ -2458,33 +2446,101 @@
             85: '\u5C0F\u9663\u96EA', 86: '\u5927\u9663\u96EA',
             95: '\u96F7\u66B4', 96: '\u96F7\u66B4', 99: '\u96F7\u66B4'
         };
+        var BLOCKS = [
+            { label: '\u6DF1\u591C', start: 0, end: 2 },
+            { label: '\u51CC\u6668', start: 3, end: 5 },
+            { label: '\u65E9\u6668', start: 6, end: 8 },
+            { label: '\u4E0A\u5348', start: 9, end: 11 },
+            { label: '\u4E2D\u5348', start: 12, end: 14 },
+            { label: '\u4E0B\u5348', start: 15, end: 17 },
+            { label: '\u508D\u665A', start: 18, end: 20 },
+            { label: '\u591C\u665A', start: 21, end: 23 }
+        ];
 
-        function updateSummary(container, data) {
+        function getIcon(code) { return WMO_ICONS[code] || '\uD83C\uDF24\uFE0F'; }
+
+        function getLocIdx(day, hour) {
+            for (var i = 0; i < day.locations.length; i++) {
+                if (hour >= day.locations[i].start && hour <= day.locations[i].end) return i;
+            }
+            return 0;
+        }
+
+        function mostCommonCode(codes, start, end) {
+            var counts = {}, best = 0, bestCount = 0;
+            for (var h = start; h <= end; h++) {
+                var c = codes[h] || 0;
+                counts[c] = (counts[c] || 0) + 1;
+                if (counts[c] > bestCount) { bestCount = counts[c]; best = c; }
+            }
+            return best;
+        }
+
+        function renderHourly(container, merged, day) {
+            if (!merged.temperature_2m) {
+                container.innerHTML = '<div class="hw-error">\u26A0\uFE0F \u7121\u6CD5\u53D6\u5F97\u5929\u6C23\u8CC7\u6599</div>';
+                return;
+            }
+            var now = new Date();
+            var multiLoc = day.locations.length > 1;
+            var html = '<div class="hourly-weather-header">';
+            html += '<span class="hourly-weather-title">\u23F0 ' + day.label + ' \u9010\u6642\u5929\u6C23\u9810\u5831</span>';
+            html += '<span class="hw-update-time">\u66F4\u65B0\uFF1A' + now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' }) + '</span>';
+            html += '</div><div class="hw-grid">';
+
+            for (var b = 0; b < BLOCKS.length; b++) {
+                var blk = BLOCKS[b];
+                var temps = [], rains = [], snows = [], codes = [];
+                for (var h = blk.start; h <= blk.end; h++) {
+                    temps.push(merged.temperature_2m[h]);
+                    rains.push(merged.precipitation_probability ? merged.precipitation_probability[h] : 0);
+                    snows.push(merged.snowfall ? merged.snowfall[h] : 0);
+                    codes.push(merged.weather_code ? merged.weather_code[h] : 0);
+                }
+                var minT = Math.round(Math.min.apply(null, temps));
+                var maxT = Math.round(Math.max.apply(null, temps));
+                var maxR = Math.max.apply(null, rains);
+                var maxS = Math.max.apply(null, snows);
+                var mainCode = mostCommonCode(merged.weather_code || [], blk.start, blk.end);
+                var locIdx = getLocIdx(day, blk.start);
+                var locName = day.locations[locIdx].name;
+
+                html += '<div class="hw-block">';
+                html += '<div class="hw-block-time">' + blk.label + ' ' + blk.start + ':00\u2013' + blk.end + ':59</div>';
+                if (multiLoc) {
+                    html += '<div class="hw-block-loc hw-loc-' + (locIdx % 4) + '">\uD83D\uDCCD ' + locName + '</div>';
+                }
+                html += '<div class="hw-block-icon">' + getIcon(mainCode) + '</div>';
+                if (minT === maxT) {
+                    html += '<div class="hw-block-temp">' + minT + '\u00B0C</div>';
+                } else {
+                    html += '<div class="hw-block-temp">' + minT + '\u00B0 ~ ' + maxT + '\u00B0C</div>';
+                }
+                html += '<div class="hw-block-rain' + (maxR >= 50 ? ' hw-rain-high' : '') + '">\uD83D\uDCA7 ' + maxR + '%</div>';
+                if (maxS > 0) {
+                    html += '<div class="hw-block-snow hw-snow-active">\u2744\uFE0F ' + maxS.toFixed(1) + 'cm</div>';
+                } else {
+                    html += '<div class="hw-block-snow">\u2744\uFE0F \u2014</div>';
+                }
+                html += '</div>';
+            }
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function updateSummary(container, merged) {
             var summaryEl = container.previousElementSibling;
             if (!summaryEl || !summaryEl.classList.contains('weather-info')) return;
-            var hourly = data.hourly;
-            var temps = hourly.temperature_2m;
-            var rains = hourly.precipitation_probability || [];
-            var snows = hourly.snowfall || [];
-            var codes = hourly.weather_code || [];
+            var temps = merged.temperature_2m;
+            var rains = merged.precipitation_probability || [];
+            var snows = merged.snowfall || [];
 
             var minTemp = Math.round(Math.min.apply(null, temps));
             var maxTemp = Math.round(Math.max.apply(null, temps));
             var minRain = Math.min.apply(null, rains);
             var maxRain = Math.max.apply(null, rains);
             var maxSnow = Math.max.apply(null, snows);
-
-            // Determine overall weather from most common code during daytime (6-18)
-            var codeCounts = {};
-            for (var h = 6; h <= 18; h++) {
-                var c = codes[h];
-                codeCounts[c] = (codeCounts[c] || 0) + 1;
-            }
-            var mainCode = 0, maxCount = 0;
-            for (var c in codeCounts) {
-                if (codeCounts[c] > maxCount) { maxCount = codeCounts[c]; mainCode = parseInt(c); }
-            }
-
+            var mainCode = mostCommonCode(merged.weather_code || [], 6, 18);
             var weatherDesc = WMO_DESC[mainCode] || '\u591A\u96F2';
             var weatherIcon = getIcon(mainCode);
 
@@ -2508,22 +2564,32 @@
         function fetchDay(day) {
             var container = document.getElementById(day.id);
             if (!container) return;
-            var url = 'https://api.open-meteo.com/v1/forecast'
-                + '?latitude=' + day.lat
-                + '&longitude=' + day.lon
-                + '&hourly=temperature_2m,precipitation_probability,snowfall,weather_code'
-                + '&start_date=' + day.date
-                + '&end_date=' + day.date
-                + '&timezone=Asia%2FTokyo';
 
-            fetch(url)
-                .then(function(res) {
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return res.json();
-                })
-                .then(function(data) {
-                    renderHourly(container, data, day.label);
-                    updateSummary(container, data);
+            var fetches = day.locations.map(function(loc) {
+                var url = 'https://api.open-meteo.com/v1/forecast'
+                    + '?latitude=' + loc.lat + '&longitude=' + loc.lon
+                    + '&hourly=temperature_2m,precipitation_probability,snowfall,weather_code'
+                    + '&start_date=' + day.date + '&end_date=' + day.date
+                    + '&timezone=Asia%2FTokyo';
+                return fetch(url).then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                });
+            });
+
+            Promise.all(fetches)
+                .then(function(results) {
+                    var merged = { temperature_2m: [], precipitation_probability: [], snowfall: [], weather_code: [] };
+                    for (var h = 0; h <= 23; h++) {
+                        var li = getLocIdx(day, h);
+                        var hr = results[li].hourly;
+                        merged.temperature_2m.push(hr.temperature_2m[h]);
+                        merged.precipitation_probability.push(hr.precipitation_probability ? hr.precipitation_probability[h] : 0);
+                        merged.snowfall.push(hr.snowfall ? hr.snowfall[h] : 0);
+                        merged.weather_code.push(hr.weather_code ? hr.weather_code[h] : 0);
+                    }
+                    renderHourly(container, merged, day);
+                    updateSummary(container, merged);
                 })
                 .catch(function(err) {
                     container.innerHTML = '<div class="hw-error">'
