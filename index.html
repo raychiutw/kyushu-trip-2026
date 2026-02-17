@@ -2403,14 +2403,14 @@
             html += '</div>';
             html += '<div class="hourly-table-wrapper"><table class="hourly-table"><thead><tr>';
             html += '<th class="hw-label"></th>';
-            for (var h = 6; h <= 21; h++) {
+            for (var h = 0; h <= 23; h++) {
                 html += '<th>' + h + ':00</th>';
             }
             html += '</tr></thead><tbody>';
 
             // Weather icon row
             html += '<tr class="hw-icon-row"><td class="hw-label">\u5929\u6C23</td>';
-            for (var h = 6; h <= 21; h++) {
+            for (var h = 0; h <= 23; h++) {
                 var code = hourly.weather_code ? hourly.weather_code[h] : 0;
                 html += '<td>' + getIcon(code) + '</td>';
             }
@@ -2418,7 +2418,7 @@
 
             // Temperature row
             html += '<tr class="hw-temp-row"><td class="hw-label">\uD83C\uDF21\uFE0F \u6C23\u6EAB</td>';
-            for (var h = 6; h <= 21; h++) {
+            for (var h = 0; h <= 23; h++) {
                 var temp = Math.round(hourly.temperature_2m[h]);
                 html += '<td>' + temp + '\u00B0</td>';
             }
@@ -2426,7 +2426,7 @@
 
             // Rain probability row
             html += '<tr class="hw-rain-row"><td class="hw-label">\uD83D\uDCA7 \u964D\u96E8</td>';
-            for (var h = 6; h <= 21; h++) {
+            for (var h = 0; h <= 23; h++) {
                 var rain = hourly.precipitation_probability ? hourly.precipitation_probability[h] : 0;
                 var cls = rain >= 50 ? ' class="hw-rain-high"' : '';
                 html += '<td' + cls + '>' + rain + '%</td>';
@@ -2435,7 +2435,7 @@
 
             // Snow row
             html += '<tr class="hw-snow-row"><td class="hw-label">\u2744\uFE0F \u964D\u96EA</td>';
-            for (var h = 6; h <= 21; h++) {
+            for (var h = 0; h <= 23; h++) {
                 var snow = hourly.snowfall ? hourly.snowfall[h] : 0;
                 var cls = snow > 0 ? ' class="hw-snow-active"' : '';
                 html += '<td' + cls + '>' + (snow > 0 ? snow.toFixed(1) + 'cm' : '-') + '</td>';
