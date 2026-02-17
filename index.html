@@ -400,10 +400,14 @@
         .print-mode .budget-card,
         .print-mode .notes,
         .print-mode .transport-line,
-        .print-mode .weather-info {
+        .print-mode .weather-info,
+        .print-mode .hourly-weather {
             background: #fff !important;
             box-shadow: none !important;
             animation: none !important;
+        }
+        .print-mode .hourly-table .hw-label {
+            background: #fff !important;
         }
         .print-mode h1,
         .print-mode h2,
@@ -474,6 +478,85 @@
             border: 1px solid #999 !important;
         }
 
+        /* Hourly Weather Forecast */
+        .hourly-weather {
+            margin: 0 0 15px;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .hourly-weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .hourly-weather-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+        }
+        .hw-update-time {
+            font-size: 0.72rem;
+            color: #999;
+        }
+        .hourly-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            padding-bottom: 4px;
+        }
+        .hourly-table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+            font-size: 0.78rem;
+        }
+        .hourly-table th,
+        .hourly-table td {
+            padding: 4px 6px;
+            text-align: center;
+            min-width: 46px;
+        }
+        .hourly-table th {
+            font-weight: 600;
+            color: #555;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            font-size: 0.73rem;
+        }
+        .hourly-table .hw-label {
+            text-align: left;
+            min-width: 65px;
+            font-weight: 600;
+            color: #666;
+            position: sticky;
+            left: 0;
+            background: rgba(255,255,255,0.95);
+            z-index: 1;
+            padding-right: 8px;
+        }
+        .hw-icon-row td { font-size: 1.1rem; padding: 2px 6px; }
+        .hw-temp-row td { font-weight: 700; color: #E65100; }
+        .hw-rain-row td { color: #1565C0; }
+        .hw-snow-row td { color: #7B1FA2; }
+        .hw-loading {
+            text-align: center;
+            padding: 12px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        .hw-error {
+            text-align: center;
+            padding: 12px;
+            color: #C62828;
+            font-size: 0.85rem;
+            background: #FFEBEE;
+            border-radius: 8px;
+        }
+        .hw-rain-high { color: #0D47A1; font-weight: 700; }
+        .hw-snow-active { color: #4A148C; font-weight: 700; }
+
         /* 列印媒體查詢 */
         @media print {
             .quick-nav {
@@ -505,10 +588,14 @@
             .budget-card,
             .notes,
             .transport-line,
-            .weather-info {
+            .weather-info,
+            .hourly-weather {
                 background: #fff !important;
                 box-shadow: none !important;
                 animation: none !important;
+            }
+            .hourly-table .hw-label {
+                background: #fff !important;
             }
             h1, h2, h3, h4, p, span, a, td, li, div {
                 color: #000 !important;
@@ -658,6 +745,9 @@
                     <div>💧 <strong>降雨機率：</strong>20%</div>
                     <div>❄️ <strong>降雪機率：</strong>0%</div>
                 </div>
+            </div>
+            <div class="hourly-weather" id="hourly-1">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
             </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=OMO5熊本" target="_blank">OMO5 熊本 by 星野集團</a> | <a href="https://hoshinoresorts.com/CH/hotels/0000000314/rooms/0000000003" target="_blank" style="font-size: 0.85em;">官網</a></h4>
@@ -884,6 +974,9 @@
                     <div>💧 <strong>降雨機率：</strong>10%</div>
                     <div>❄️ <strong>降雪機率：</strong>5%（山區）</div>
                 </div>
+            </div>
+            <div class="hourly-weather" id="hourly-2">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
             </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=SOLEST高千穂ホテル" target="_blank">SOLEST 高千穗飯店</a> | <a href="https://www.agoda.com/sl/eQk4YiI18Ko" target="_blank" style="font-size: 0.85em;">Agoda</a></h4>
@@ -1133,6 +1226,9 @@
                     <div>❄️ <strong>降雪機率：</strong>5%</div>
                 </div>
             </div>
+            <div class="hourly-weather" id="hourly-3">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
+            </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=黒川温泉+旅館わかば" target="_blank">若葉日式旅館 Ryokan Wakaba</a> | <a href="https://www.booking.com/hotel/jp/ryokan-wakaba.zh-tw.html" target="_blank" style="font-size: 0.85em;">Booking</a></h4>
                 <div class="hotel-details">
@@ -1334,6 +1430,9 @@
                     <div>💧 <strong>降雨機率：</strong>20%</div>
                     <div>❄️ <strong>降雪機率：</strong>0%</div>
                 </div>
+            </div>
+            <div class="hourly-weather" id="hourly-4">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
             </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=スーパーホテル別府駅前" target="_blank">別府站前超級飯店 Super Hotel</a> | <a href="https://go-superhotel.reservation.jp/zh-tw/hotels/sh-beppu" target="_blank" style="font-size: 0.85em;">官網</a></h4>
@@ -1561,6 +1660,9 @@
                     <div>❄️ <strong>降雪機率：</strong>0%</div>
                 </div>
             </div>
+            <div class="hourly-weather" id="hourly-5">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
+            </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=やわらぎの郷やどや" target="_blank">溫柔之鄉 Yawaraginosato Yadoya</a> | <a href="https://www.yawaraginosato.com/zh-tw/" target="_blank" style="font-size: 0.85em;">官網</a></h4>
                 <div class="hotel-details">
@@ -1723,6 +1825,9 @@
                     <div>💧 <strong>降雨機率：</strong>20%</div>
                     <div>❄️ <strong>降雪機率：</strong>0%</div>
                 </div>
+            </div>
+            <div class="hourly-weather" id="hourly-6">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
             </div>
             <div class="hotel-info">
                 <h4>🏨 <a href="https://maps.google.com/?q=東横イン博多口駅前" target="_blank">東橫INN 博多口站前</a> | <a href="https://www.toyoko-inn.com/china/search/detail/00043" target="_blank" style="font-size: 0.85em;">官網</a></h4>
@@ -1976,6 +2081,9 @@
                     <div>💧 <strong>降雨機率：</strong>10%</div>
                     <div>❄️ <strong>降雪機率：</strong>0%</div>
                 </div>
+            </div>
+            <div class="hourly-weather" id="hourly-7">
+                <div class="hw-loading">⏳ 正在載入逐時天氣預報...</div>
             </div>
              <div class="timeline">
                  <div class="event">
@@ -2253,5 +2361,120 @@
             <p style="font-size: 0.9rem;">祝旅途愉快！いってらっしゃい！</p>
         </footer>
     </div>
+    <script>
+    (function() {
+        var DAYS = [
+            { id: 'hourly-1', lat: 32.8032, lon: 130.7079, date: '2026-02-16', label: '熊本' },
+            { id: 'hourly-2', lat: 32.8842, lon: 131.0736, date: '2026-02-17', label: '阿蘇・高千穗' },
+            { id: 'hourly-3', lat: 33.0900, lon: 131.0730, date: '2026-02-18', label: '高千穗・黑川溫泉' },
+            { id: 'hourly-4', lat: 33.2846, lon: 131.4914, date: '2026-02-19', label: '別府' },
+            { id: 'hourly-5', lat: 33.2714, lon: 131.3681, date: '2026-02-20', label: '由布院' },
+            { id: 'hourly-6', lat: 33.5902, lon: 130.4017, date: '2026-02-21', label: '太宰府・福岡' },
+            { id: 'hourly-7', lat: 33.5902, lon: 130.4017, date: '2026-02-22', label: '福岡' }
+        ];
+
+        var WMO_ICONS = {
+            0: '\u2600\uFE0F', 1: '\uD83C\uDF24\uFE0F', 2: '\u26C5', 3: '\u2601\uFE0F',
+            45: '\uD83C\uDF2B\uFE0F', 48: '\uD83C\uDF2B\uFE0F',
+            51: '\uD83C\uDF26\uFE0F', 53: '\uD83C\uDF26\uFE0F', 55: '\uD83C\uDF26\uFE0F',
+            56: '\uD83C\uDF27\uFE0F', 57: '\uD83C\uDF27\uFE0F',
+            61: '\uD83C\uDF27\uFE0F', 63: '\uD83C\uDF27\uFE0F', 65: '\uD83C\uDF27\uFE0F',
+            66: '\uD83C\uDF27\uFE0F', 67: '\uD83C\uDF27\uFE0F',
+            71: '\uD83C\uDF28\uFE0F', 73: '\uD83C\uDF28\uFE0F', 75: '\uD83C\uDF28\uFE0F', 77: '\uD83C\uDF28\uFE0F',
+            80: '\uD83C\uDF27\uFE0F', 81: '\uD83C\uDF27\uFE0F', 82: '\uD83C\uDF27\uFE0F',
+            85: '\uD83C\uDF28\uFE0F', 86: '\uD83C\uDF28\uFE0F',
+            95: '\u26C8\uFE0F', 96: '\u26C8\uFE0F', 99: '\u26C8\uFE0F'
+        };
+
+        function getIcon(code) {
+            return WMO_ICONS[code] || '\uD83C\uDF24\uFE0F';
+        }
+
+        function renderHourly(container, data, label) {
+            var hourly = data.hourly;
+            if (!hourly || !hourly.temperature_2m) {
+                container.innerHTML = '<div class="hw-error">\u26A0\uFE0F \u7121\u6CD5\u53D6\u5F97\u5929\u6C23\u8CC7\u6599</div>';
+                return;
+            }
+            var now = new Date();
+            var html = '<div class="hourly-weather-header">';
+            html += '<span class="hourly-weather-title">\u23F0 ' + label + '\u9010\u6642\u5929\u6C23\u9810\u5831</span>';
+            html += '<span class="hw-update-time">\u66F4\u65B0\uFF1A' + now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' }) + '</span>';
+            html += '</div>';
+            html += '<div class="hourly-table-wrapper"><table class="hourly-table"><thead><tr>';
+            html += '<th class="hw-label"></th>';
+            for (var h = 6; h <= 21; h++) {
+                html += '<th>' + h + ':00</th>';
+            }
+            html += '</tr></thead><tbody>';
+
+            // Weather icon row
+            html += '<tr class="hw-icon-row"><td class="hw-label">\u5929\u6C23</td>';
+            for (var h = 6; h <= 21; h++) {
+                var code = hourly.weather_code ? hourly.weather_code[h] : 0;
+                html += '<td>' + getIcon(code) + '</td>';
+            }
+            html += '</tr>';
+
+            // Temperature row
+            html += '<tr class="hw-temp-row"><td class="hw-label">\uD83C\uDF21\uFE0F \u6C23\u6EAB</td>';
+            for (var h = 6; h <= 21; h++) {
+                var temp = Math.round(hourly.temperature_2m[h]);
+                html += '<td>' + temp + '\u00B0</td>';
+            }
+            html += '</tr>';
+
+            // Rain probability row
+            html += '<tr class="hw-rain-row"><td class="hw-label">\uD83D\uDCA7 \u964D\u96E8</td>';
+            for (var h = 6; h <= 21; h++) {
+                var rain = hourly.precipitation_probability ? hourly.precipitation_probability[h] : 0;
+                var cls = rain >= 50 ? ' class="hw-rain-high"' : '';
+                html += '<td' + cls + '>' + rain + '%</td>';
+            }
+            html += '</tr>';
+
+            // Snow row
+            html += '<tr class="hw-snow-row"><td class="hw-label">\u2744\uFE0F \u964D\u96EA</td>';
+            for (var h = 6; h <= 21; h++) {
+                var snow = hourly.snowfall ? hourly.snowfall[h] : 0;
+                var cls = snow > 0 ? ' class="hw-snow-active"' : '';
+                html += '<td' + cls + '>' + (snow > 0 ? snow.toFixed(1) + 'cm' : '-') + '</td>';
+            }
+            html += '</tr>';
+
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        }
+
+        function fetchDay(day) {
+            var container = document.getElementById(day.id);
+            if (!container) return;
+            var url = 'https://api.open-meteo.com/v1/forecast'
+                + '?latitude=' + day.lat
+                + '&longitude=' + day.lon
+                + '&hourly=temperature_2m,precipitation_probability,snowfall,weather_code'
+                + '&start_date=' + day.date
+                + '&end_date=' + day.date
+                + '&timezone=Asia%2FTokyo';
+
+            fetch(url)
+                .then(function(res) {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(function(data) {
+                    renderHourly(container, data, day.label);
+                })
+                .catch(function(err) {
+                    container.innerHTML = '<div class="hw-error">'
+                        + '\u26A0\uFE0F \u7121\u6CD5\u8F09\u5165\u5929\u6C23\u8CC7\u6599\uFF08' + err.message + '\uFF09'
+                        + '<br><small>\u9810\u5831\u8CC7\u6599\u53EF\u80FD\u5C1A\u672A\u958B\u653E\uFF0C\u8ACB\u65BC\u51FA\u767C\u524D 1-7 \u5929\u518D\u6B21\u67E5\u770B</small>'
+                        + '</div>';
+                });
+        }
+
+        DAYS.forEach(fetchDay);
+    })();
+    </script>
 </body>
 </html>
