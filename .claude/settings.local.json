@@ -12,7 +12,7 @@
       "Bash(gh repo rename:*)",
       "Bash(git remote set-url:*)",
       "WebSearch",
-      "Bash(gh auth status:*)"
+      "Bash(git pull:*)"
     ]
   }
 }

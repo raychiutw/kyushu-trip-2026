@@ -304,53 +304,45 @@
         .quick-nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border-radius: 25px;
             margin-bottom: 25px;
-            padding: 12px 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             border: 2px solid var(--warm-brown);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
-        .quick-nav-label {
-            font-weight: 700;
+        .quick-nav-select {
+            padding: 8px 14px;
+            border: 2px solid var(--warm-brown);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.95);
             color: var(--warm-brown);
+            font-family: 'Noto Sans TC', sans-serif;
             font-size: 0.9rem;
-            margin-right: 5px;
-        }
-        .quick-nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 14px;
-            border-radius: 15px;
-            font-size: 0.8rem;
             font-weight: 600;
-            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238B7355' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+        .quick-nav-select:hover, .quick-nav-select:focus {
+            background-color: var(--warm-brown);
             color: white;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
         }
-        .quick-nav a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .quick-nav a:active {
-            transform: translateY(0);
-        }
-        .quick-nav a[href="#day1"] { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
-        .quick-nav a[href="#day2"] { background: linear-gradient(135deg, #FFA94D, #FFD93D); color: #333; }
-        .quick-nav a[href="#day3"] { background: linear-gradient(135deg, #51CF66, #8CE99A); }
-        .quick-nav a[href="#day4"] { background: linear-gradient(135deg, #339AF0, #74C0FC); }
-        .quick-nav a[href="#day5"] { background: linear-gradient(135deg, #CC5DE8, #E599F7); }
-        .quick-nav a[href="#day6"] { background: linear-gradient(135deg, #20C997, #63E6BE); }
-        .quick-nav a[href="#day7"] { background: linear-gradient(135deg, #868E96, #ADB5BD); }
 
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
@@ -360,27 +352,24 @@
             .transport-between { margin-left: 0; }
             .hotel-details { grid-template-columns: 1fr; }
             body::before { display: none; }
-            .quick-nav { gap: 5px; padding: 10px; }
-            .quick-nav a { padding: 5px 10px; font-size: 0.7rem; }
-            .quick-nav-label { display: none; }
+            .quick-nav { padding: 8px 12px; }
+            .quick-nav-select { font-size: 0.8rem; padding: 6px 28px 6px 10px; }
+            .print-toggle { font-size: 0.8rem; padding: 6px 10px; }
         }
         /* 列印模式切換按鈕 */
         .print-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 10px 20px;
+            padding: 6px 14px;
             border: 2px solid var(--warm-brown);
-            border-radius: 25px;
+            border-radius: 15px;
             background: rgba(255,255,255,0.95);
             color: var(--warm-brown);
             font-family: 'Noto Sans TC', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
+            margin-left: auto;
+            white-space: nowrap;
         }
         .print-toggle:hover {
             background: var(--warm-brown);
@@ -465,6 +454,19 @@
         .print-mode .event-card {
             border-left-color: #333 !important;
         }
+        .print-mode .quick-nav {
+            background: #fff !important;
+            border-color: #999 !important;
+            box-shadow: none !important;
+        }
+        .print-mode .quick-nav-select {
+            border-color: #555 !important;
+            color: #333 !important;
+        }
+        .print-mode .print-toggle {
+            border-color: #555 !important;
+            color: #333 !important;
+        }
         .print-mode [class^="tag-"],
         .print-mode [class*=" tag-"] {
             background: #fff !important;
@@ -474,7 +476,7 @@
 
         /* 列印媒體查詢 */
         @media print {
-            .print-toggle {
+            .quick-nav {
                 display: none !important;
             }
             .day-card {
@@ -558,7 +560,6 @@
     </style>
 </head>
 <body>
-    <button class="print-toggle" onclick="document.body.classList.toggle('print-mode'); this.textContent = document.body.classList.contains('print-mode') ? '🎨 一般模式' : '🖨️ 列印模式'">🖨️ 列印模式</button>
     <div class="container">
         <header>
             <h1>🌸 2026 九州七日遊 🗾</h1>
@@ -567,14 +568,17 @@
         </header>
 
         <nav class="quick-nav">
-            <span class="quick-nav-label">📅 快速跳轉</span>
-            <a href="#day1">D1 熊本</a>
-            <a href="#day2">D2 阿蘇</a>
-            <a href="#day3">D3 高千穗</a>
-            <a href="#day4">D4 別府</a>
-            <a href="#day5">D5 由布院</a>
-            <a href="#day6">D6 福岡</a>
-            <a href="#day7">D7 福岡</a>
+            <select class="quick-nav-select" onchange="if(this.value){document.getElementById(this.value).scrollIntoView({behavior:'smooth',block:'start'});this.selectedIndex=0;}">
+                <option value="">📅 快速跳轉</option>
+                <option value="day1">Day 1 - 熊本探索</option>
+                <option value="day2">Day 2 - 阿蘇火山</option>
+                <option value="day3">Day 3 - 高千穗秘境</option>
+                <option value="day4">Day 4 - 別府地獄</option>
+                <option value="day5">Day 5 - 由布院</option>
+                <option value="day6">Day 6 - 返回福岡</option>
+                <option value="day7">Day 7 - 福岡市區</option>
+            </select>
+            <button class="print-toggle" onclick="document.body.classList.toggle('print-mode'); this.textContent = document.body.classList.contains('print-mode') ? '🎨 一般模式' : '🖨️ 列印模式'">🖨️ 列印模式</button>
         </nav>
 
         <!-- Pre-Departure Checklist -->
