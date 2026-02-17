@@ -19,6 +19,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -104,6 +105,7 @@
             border: 3px solid var(--warm-brown);
         }
 
+        .day-card[id] { scroll-margin-top: 80px; }
         .day-header { padding: 20px 25px; color: white; display: flex; justify-content: space-between; align-items: center; }
         .day-1 .day-header { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
         .day-2 .day-header { background: linear-gradient(135deg, #FFA94D, #FFD93D); }
@@ -299,6 +301,57 @@
         }
         .totoro-decoration { font-size: 3rem; margin: 10px 0; }
 
+        .quick-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            padding: 12px 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 2px solid var(--warm-brown);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .quick-nav-label {
+            font-weight: 700;
+            color: var(--warm-brown);
+            font-size: 0.9rem;
+            margin-right: 5px;
+        }
+        .quick-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .quick-nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .quick-nav a:active {
+            transform: translateY(0);
+        }
+        .quick-nav a[href="#day1"] { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+        .quick-nav a[href="#day2"] { background: linear-gradient(135deg, #FFA94D, #FFD93D); color: #333; }
+        .quick-nav a[href="#day3"] { background: linear-gradient(135deg, #51CF66, #8CE99A); }
+        .quick-nav a[href="#day4"] { background: linear-gradient(135deg, #339AF0, #74C0FC); }
+        .quick-nav a[href="#day5"] { background: linear-gradient(135deg, #CC5DE8, #E599F7); }
+        .quick-nav a[href="#day6"] { background: linear-gradient(135deg, #20C997, #63E6BE); }
+        .quick-nav a[href="#day7"] { background: linear-gradient(135deg, #868E96, #ADB5BD); }
+
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
             .day-header { flex-direction: column; gap: 10px; }
@@ -307,6 +360,9 @@
             .transport-between { margin-left: 0; }
             .hotel-details { grid-template-columns: 1fr; }
             body::before { display: none; }
+            .quick-nav { gap: 5px; padding: 10px; }
+            .quick-nav a { padding: 5px 10px; font-size: 0.7rem; }
+            .quick-nav-label { display: none; }
         }
         /* 列印模式切換按鈕 */
         .print-toggle {
@@ -510,6 +566,17 @@
             <div class="departure-info">📍 出發地點：新北市板橋區</div>
         </header>
 
+        <nav class="quick-nav">
+            <span class="quick-nav-label">📅 快速跳轉</span>
+            <a href="#day1">D1 熊本</a>
+            <a href="#day2">D2 阿蘇</a>
+            <a href="#day3">D3 高千穗</a>
+            <a href="#day4">D4 別府</a>
+            <a href="#day5">D5 由布院</a>
+            <a href="#day6">D6 福岡</a>
+            <a href="#day7">D7 福岡</a>
+        </nav>
+
         <!-- Pre-Departure Checklist -->
         <div class="emergency-card" style="border-color: #FF9800;">
             <h3 style="color: #FF9800;">📋 出發前確認事項</h3>
@@ -571,7 +638,7 @@
         </div>
 
         <!-- Day 1 -->
-        <div class="day-card day-1">
+        <div id="day1" class="day-card day-1">
             <div class="day-header">
                 <div>
                     <h2>Day 1 - 熊本探索</h2>
@@ -797,7 +864,7 @@
          </div>
 
          <!-- Day 2 -->
-        <div class="day-card day-2">
+        <div id="day2" class="day-card day-2">
             <div class="day-header">
                 <div>
                     <h2>Day 2 - 阿蘇火山之旅</h2>
@@ -1045,7 +1112,7 @@
          </div>
 
         <!-- Day 3 -->
-        <div class="day-card day-3">
+        <div id="day3" class="day-card day-3">
             <div class="day-header">
                 <div>
                     <h2>Day 3 - 高千穗秘境</h2>
@@ -1247,7 +1314,7 @@
          </div>
 
         <!-- Day 4 -->
-        <div class="day-card day-4">
+        <div id="day4" class="day-card day-4">
             <div class="day-header">
                 <div>
                     <h2>Day 4 - 別府地獄巡禮</h2>
@@ -1473,7 +1540,7 @@
          </div>
 
          <!-- Day 5 -->
-        <div class="day-card day-5">
+        <div id="day5" class="day-card day-5">
             <div class="day-header">
                 <div>
                     <h2>Day 5 - 由布院悠閒日</h2>
@@ -1636,7 +1703,7 @@
          </div>
 
          <!-- Day 6 -->
-        <div class="day-card day-6">
+        <div id="day6" class="day-card day-6">
             <div class="day-header">
                 <div>
                     <h2>Day 6 - 返回福岡</h2>
@@ -1889,7 +1956,7 @@
          </div>
 
         <!-- Day 7 -->
-        <div class="day-card day-7">
+        <div id="day7" class="day-card day-7">
             <div class="day-header">
                 <div>
                     <h2>Day 7 - 福岡市區</h2>
